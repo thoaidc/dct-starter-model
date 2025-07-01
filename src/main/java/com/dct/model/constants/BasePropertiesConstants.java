@@ -8,4 +8,5 @@ package com.dct.model.constants;
  */
 public interface BasePropertiesConstants {
     String SECURITY_JWT_CONFIG = "dct.base.security.jwt";
+    String I18N_CONFIG = "dct.base.i18n";
 }

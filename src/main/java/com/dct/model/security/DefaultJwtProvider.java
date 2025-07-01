@@ -4,6 +4,7 @@ import com.dct.model.config.properties.JwtProps;
 import com.dct.model.constants.BaseExceptionConstants;
 import com.dct.model.constants.BaseSecurityConstants;
 import com.dct.model.dto.auth.BaseAuthTokenDTO;
+import com.dct.model.dto.auth.UserDTO;
 import com.dct.model.exception.BaseAuthenticationException;
 import com.dct.model.exception.BaseBadRequestException;
 
@@ -20,7 +21,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.util.StringUtils;
 
 import java.time.Instant;
@@ -107,6 +107,7 @@ public class DefaultJwtProvider extends BaseJwtProvider {
     @Override
     public Authentication getAuthentication(String token) {
         Claims claims = (Claims) jwtParser.parse(token).getPayload();
+        Integer userId = (Integer) claims.get(BaseSecurityConstants.TOKEN_PAYLOAD.USER_ID);
         String authorities = (String) claims.get(BaseSecurityConstants.TOKEN_PAYLOAD.AUTHORITIES);
 
         if (!StringUtils.hasText(authorities)) {
@@ -118,7 +119,8 @@ public class DefaultJwtProvider extends BaseJwtProvider {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
 
-        User principal = new User(claims.getSubject(), "none-password", userAuthorities);
+        UserDTO principal = new UserDTO(claims.getSubject(), "none-password", userAuthorities);
+        principal.setId(userId);
         return new UsernamePasswordAuthenticationToken(principal, token, userAuthorities);
     }
 }
