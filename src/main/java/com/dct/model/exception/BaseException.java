@@ -13,13 +13,15 @@ package com.dct.model.exception;
 @SuppressWarnings("unused")
 public abstract class BaseException extends RuntimeException {
 
+    private final Integer code;
     private final String entityName;
     private final String errorKey;
     private final Object[] args;
     private final Throwable error;
 
-    protected BaseException(String entityName, String errorKey, Object[] args, Throwable error) {
+    protected BaseException(Integer code, String entityName, String errorKey, Object[] args, Throwable error) {
         super(entityName + '-' + errorKey, error);
+        this.code = code;
         this.entityName = entityName;
         this.errorKey = errorKey;
         this.args = args;
@@ -42,16 +44,25 @@ public abstract class BaseException extends RuntimeException {
         return error;
     }
 
+    public Integer getCode() {
+        return code;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
-
+        private Integer code;
         private String entityName;
         private String errorKey;
         private Object[] args;
         private Throwable error;
+
+        public Builder code(Integer code) {
+            this.code = code;
+            return this;
+        }
 
         public Builder entityName(String entityName) {
             this.entityName = entityName;
@@ -74,19 +85,19 @@ public abstract class BaseException extends RuntimeException {
         }
 
         public BaseAuthenticationException authenticationException() {
-            return new BaseAuthenticationException(entityName, errorKey, args, error);
+            return new BaseAuthenticationException(code, entityName, errorKey, args, error);
         }
 
         public BaseBadRequestException badRequestException() {
-            return new BaseBadRequestException(entityName, errorKey, args, error);
+            return new BaseBadRequestException(code, entityName, errorKey, args, error);
         }
 
         public BaseBadRequestAlertException badRequestAlertException() {
-            return new BaseBadRequestAlertException(entityName, errorKey, args, error);
+            return new BaseBadRequestAlertException(code, entityName, errorKey, args, error);
         }
 
         public BaseIllegalArgumentException illegalArgumentException() {
-            return new BaseIllegalArgumentException(entityName, errorKey, args, error);
+            return new BaseIllegalArgumentException(code, entityName, errorKey, args, error);
         }
     }
 }
