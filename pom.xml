@@ -83,7 +83,6 @@
 
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
-        <defaultGoal>spring-boot:run</defaultGoal>
 
         <plugins>
             <!-- Build JAR -->
