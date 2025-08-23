@@ -70,7 +70,7 @@ public class BaseRequestDTO implements Serializable {
                         .toLocalDateTime();
                 return formatter.withZone(ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH)).format(localDateTime);
             } catch (DateTimeParseException e) {
-                log.error("Could not parse fromDate from request, skip filter by fromDate. {}", e.getMessage());
+                log.error("[ERROR_CONVERT_FROM_DATE_REQUEST] - fromDate = {} from request: {}", fromDate, e.getMessage());
             }
         }
 
@@ -86,7 +86,7 @@ public class BaseRequestDTO implements Serializable {
                         .toLocalDateTime();
                 return formatter.withZone(ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH)).format(localDateTime);
             } catch (DateTimeParseException e) {
-                log.error("Could not parse toDate from request, skip filter by toDate. {}", e.getMessage());
+                log.error("[ERROR_CONVERT_TO_DATE_REQUEST] - toDate = {} from request: {}", toDate, e.getMessage());
             }
         }
 

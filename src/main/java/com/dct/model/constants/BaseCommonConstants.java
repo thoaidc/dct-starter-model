@@ -10,7 +10,7 @@ public interface BaseCommonConstants {
     String DEFAULT_CREATOR = "SYSTEM"; // Used instead of the default user value mentioned above to store in database
 
     // The location where the resource bundle files for i18n messages are stored
-    String[] DEFAULT_MESSAGE_SOURCE_BASENAME = { "classpath:i18n/messages" };
+    String[] DEFAULT_MESSAGE_SOURCE_BASENAME = { "classpath:i18n/messages", "classpath:i18n/base_messages" };
     String DEFAULT_MESSAGE_SOURCE_ENCODING = "UTF-8"; // Specifies the charset for i18n messages
 
     interface Images {
@@ -30,16 +30,42 @@ public interface BaseCommonConstants {
         String DEFAULT_IMAGE_PATH_FOR_ERROR = "/error_image.webp";
 
         String[] DEFAULT_PATTERNS = {
-                "/uploads/**"
+            "/uploads/**"
         };
 
         String[] DEFAULT_LOCATIONS = {
-                "/uploads/"
+            "/uploads/"
         };
     }
 
     // The paths that will be ignored by interceptors when processing requests
     String[] DEFAULT_INTERCEPTOR_EXCLUDED_PATTERNS = {
+        "/**.html",
+        "/**.js",
+        "/**.css",
+        "/**.webp",
+        "/**.jpg",
+        "/**.jpeg",
+        "/**.gif",
+        "/**.svg",
+        "/**.png",
+        "/**.ico",
+        "/uploads/**",
+        "/file/**",
+        "/login",
+        "/error**",
+        "/i18n/**"
+    };
+
+
+    /**
+     * Configures the handling of static resources <p>
+     * Static resource requests listed in the {@link STATIC_RESOURCES#DEFAULT_PATTERNS} section will be automatically searched for
+     * and mapped to the directories listed in the {@link STATIC_RESOURCES#DEFAULT_LOCATIONS} section
+     */
+    interface STATIC_RESOURCES {
+
+        String[] DEFAULT_PATTERNS = {
             "/**.html",
             "/**.js",
             "/**.css",
@@ -52,38 +78,12 @@ public interface BaseCommonConstants {
             "/**.ico",
             "/uploads/**",
             "/file/**",
-            "/login",
-            "/error**",
             "/i18n/**"
-    };
-
-
-    /**
-     * Configures the handling of static resources <p>
-     * Static resource requests listed in the {@link STATIC_RESOURCES#DEFAULT_PATTERNS} section will be automatically searched for
-     * and mapped to the directories listed in the {@link STATIC_RESOURCES#DEFAULT_LOCATIONS} section
-     */
-    interface STATIC_RESOURCES {
-
-        String[] DEFAULT_PATTERNS = {
-                "/**.html",
-                "/**.js",
-                "/**.css",
-                "/**.webp",
-                "/**.jpg",
-                "/**.jpeg",
-                "/**.gif",
-                "/**.svg",
-                "/**.png",
-                "/**.ico",
-                "/uploads/**",
-                "/file/**",
-                "/i18n/**"
         };
 
         String[] DEFAULT_LOCATIONS = {
-                "classpath:/static/",
-                "classpath:/static/i18n/"
+            "classpath:/static/",
+            "classpath:/static/i18n/"
         };
     }
 

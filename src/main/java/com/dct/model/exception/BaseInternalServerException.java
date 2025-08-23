@@ -1,13 +1,13 @@
 package com.dct.model.exception;
 
 @SuppressWarnings("unused")
-public class BaseIllegalArgumentException extends BaseException {
+public class BaseInternalServerException extends BaseException {
 
-    public BaseIllegalArgumentException(String entityName, String errorKey) {
+    public BaseInternalServerException(String entityName, String errorKey) {
         super(entityName, errorKey, null, null, null);
     }
 
-    private BaseIllegalArgumentException(String entityName, String errorKey, Object[] args, Throwable error, String message) {
+    private BaseInternalServerException(String entityName, String errorKey, Object[] args, Throwable error, String message) {
         super(entityName, errorKey, args, error, message);
     }
 
@@ -47,8 +47,8 @@ public class BaseIllegalArgumentException extends BaseException {
             return this;
         }
 
-        public BaseIllegalArgumentException build() {
-            return new BaseIllegalArgumentException(entityName, errorKey, args, error, originalMessage);
+        public BaseInternalServerException build() {
+            return new BaseInternalServerException(entityName, errorKey, args, error, originalMessage);
         }
     }
 }

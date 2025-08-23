@@ -12,21 +12,31 @@ public interface BasePropertiesConstants {
     String DATASOURCE_CONFIG = "spring.datasource";
     String HIKARI_CONFIG = "spring.datasource.hikari";
     String HIKARI_DATASOURCE_CONFIG = "spring.datasource.hikari.data-source-properties";
+    String ENABLED_DATASOURCE = "app.datasource";
+    String ENABLED_AUDITING = "app.jpa-auditing";
 
-    String I18N_CONFIG = "dct.base.i18n";
-    String RESOURCE_CONFIG = "dct.base.resources";
-    String INTERCEPTOR_CONFIG = "dct.base.interceptor";
-    String SECURITY_CONFIG = "dct.base.security";
-    String SECURITY_OAUTH2_CONFIG = "dct.base.security.oauth2";
-    String SECURITY_JWT_CONFIG = "dct.base.security.jwt";
-    String SOCKET_CONFIG = "dct.base.socket";
-
-    String ENABLED_JWT = "dct.base.security.jwt.enabled";
-    String ENABLED_OAUTH2 = "dct.base.security.oauth2.enabled";
-    String ENABLED_DATASOURCE = "dct.base.features.datasource";
-    String ENABLED_AUDITING = "dct.base.features.jpa-auditing";
-    String ENABLED_REST_TEMPLATE = "dct.base.features.default-rest-template";
-    String ENABLED_RESOURCE = "dct.base.features.resources";
+    String I18N_CONFIG = "app.i18n";
+    String SOCKET_CONFIG = "app.socket";
     String ENABLED_SOCKET = "dct.base.features.socket";
-    String ENABLED_I18N = "dct.base.features.i18n";
+
+    String INTERCEPTOR_CONFIG = "app.interceptors";
+    String ENABLED_INTERCEPTOR_CONFIG = "app.interceptors.activate";
+
+    String RESOURCE_CONFIG = "app.resources";
+    String ENABLED_RESOURCE = "app.resources.activate";
+
+    String SECURITY_CONFIG = "app.security";
+    String AUTHENTICATION_TYPE = "app.security.authentication-type";
+    String SECURITY_OAUTH2_CONFIG = "dct.base.security.oauth2";
+    String ENABLED_OAUTH2 = "dct.base.security.oauth2.enabled";
+
+    String HTTP_CLIENT_CONFIG = "app.http-client";
+    String CIRCUIT_BREAKER_CONFIG = "app.http-client.circuit-breaker";
+    String CIRCUIT_BREAKER_RETRY_CONFIG = "app.http-client.circuit-breaker.retry";
+    String CIRCUIT_BREAKER_TIME_LIMITER_CONFIG = "app.http-client.circuit-breaker.time-limiter";
+
+    String ENABLED_REST_TEMPLATE = "app.http-client.rest-template";
+    String ENABLED_CIRCUIT_BREAKER_CONFIG = "app.http-client.circuit-breaker.activate";
+    String ENABLED_CIRCUIT_BREAKER_RETRY_CONFIG = "app.http-client.circuit-breaker.retry.activate";
+    String ENABLED_CIRCUIT_BREAKER_TIME_LIMITER_CONFIG = "app.http-client.circuit-breaker.time-limiter.activate";
 }

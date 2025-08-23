@@ -19,11 +19,9 @@ public class BaseResponseDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
     private Integer code; // Http status
-
     // The status indicating successful processing of the request (in the case of valid input data and no system errors)
-    private Boolean status;
+    private Boolean status = false;
     private String message; // The response content follows the i18n standard
     private Object result; // The data after processing the request, is not required and can be null
     private Long total; // Total records if query with pageable, is not required and can be null
@@ -63,7 +61,7 @@ public class BaseResponseDTO implements Serializable {
 
         public BaseResponseDTO ok() {
             instance.code = BaseHttpStatusConstants.OK;
-            instance.status = BaseHttpStatusConstants.STATUS.SUCCESS;
+            instance.status = Boolean.TRUE;
             instance.message = instance.message != null ? instance.message : BaseResultConstants.SUCCESS;
             return instance;
         }

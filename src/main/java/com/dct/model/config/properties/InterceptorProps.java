@@ -1,11 +1,14 @@
 package com.dct.model.config.properties;
 
+import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BasePropertiesConstants;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * When the application starts, Spring will automatically create an instance of this class
@@ -24,16 +27,9 @@ import java.util.List;
 @ConfigurationProperties(prefix = BasePropertiesConstants.INTERCEPTOR_CONFIG)
 public class InterceptorProps {
 
-    private String[] excludedPatterns;
     private CorsConfig cors;
-
-    public String[] getExcludedPatterns() {
-        return excludedPatterns;
-    }
-
-    public void setExcludedPatterns(String[] excludedPatterns) {
-        this.excludedPatterns = excludedPatterns;
-    }
+    private ActivateStatus activate;
+    private List<InterceptorConfig> chain;
 
     public CorsConfig getCors() {
         return cors;
@@ -41,6 +37,22 @@ public class InterceptorProps {
 
     public void setCors(CorsConfig cors) {
         this.cors = cors;
+    }
+
+    public ActivateStatus getActivate() {
+        return activate;
+    }
+
+    public void setActivate(ActivateStatus activate) {
+        this.activate = activate;
+    }
+
+    public List<InterceptorConfig> getChain() {
+        return Optional.ofNullable(chain).orElse(Collections.emptyList());
+    }
+
+    public void setChain(List<InterceptorConfig> chain) {
+        this.chain = chain;
     }
 
     public static class CorsConfig {
@@ -88,6 +100,36 @@ public class InterceptorProps {
 
         public void setAllowedCredentials(Boolean allowedCredentials) {
             this.allowedCredentials = allowedCredentials;
+        }
+    }
+
+    public static class InterceptorConfig {
+        private Class<?> name;
+        private String[] includedPatterns;
+        private String[] excludedPatterns;
+
+        public Class<?> getName() {
+            return name;
+        }
+
+        public void setName(Class<?> name) {
+            this.name = name;
+        }
+
+        public String[] getIncludedPatterns() {
+            return includedPatterns;
+        }
+
+        public void setIncludedPatterns(String[] includedPatterns) {
+            this.includedPatterns = includedPatterns;
+        }
+
+        public String[] getExcludedPatterns() {
+            return excludedPatterns;
+        }
+
+        public void setExcludedPatterns(String[] excludedPatterns) {
+            this.excludedPatterns = excludedPatterns;
         }
     }
 }

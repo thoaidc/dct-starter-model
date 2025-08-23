@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
  * @author thoaidc
  */
 @SuppressWarnings("unused")
-public class BaseAuthTokenDTO {
+public class BaseTokenDTO {
 
     private Authentication authentication; // Contains user authorities information
     private String username;
@@ -21,7 +21,7 @@ public class BaseAuthTokenDTO {
     }
 
     public static class Builder {
-        private final BaseAuthTokenDTO instance = new BaseAuthTokenDTO();
+        private final BaseTokenDTO instance = new BaseTokenDTO();
 
         public Builder authentication(Authentication authentication) {
             instance.authentication = authentication;
@@ -43,12 +43,12 @@ public class BaseAuthTokenDTO {
             return this;
         }
 
-        public BaseAuthTokenDTO build() {
+        public BaseTokenDTO build() {
             return instance;
         }
     }
 
-    public BaseAuthTokenDTO() {}
+    public BaseTokenDTO() {}
 
     public Authentication getAuthentication() {
         return authentication;

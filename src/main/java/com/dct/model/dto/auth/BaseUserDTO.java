@@ -1,0 +1,97 @@
+package com.dct.model.dto.auth;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import java.util.Collection;
+import java.util.HashSet;
+
+@SuppressWarnings("unused")
+public class BaseUserDTO extends User {
+
+    private final Long id;
+
+    private BaseUserDTO(Long id,
+                        String username,
+                        String password,
+                        boolean enabled,
+                        boolean accountNonExpired,
+                        boolean credentialsNonExpired,
+                        boolean accountNonLocked,
+                        Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public static Builder userBuilder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String username;
+        private String password;
+        private boolean enabled = true;
+        private boolean accountNonExpired = true;
+        private boolean credentialsNonExpired = true;
+        private boolean accountNonLocked = true;
+        private Collection<? extends GrantedAuthority> authorities = new HashSet<>();
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder withEnabled(boolean enabled) {
+            this.enabled = enabled;
+            return this;
+        }
+
+        public Builder withAccountNonExpired(boolean accountNonExpired) {
+            this.accountNonExpired = accountNonExpired;
+            return this;
+        }
+
+        public Builder withCredentialsNonExpired(boolean credentialsNonExpired) {
+            this.credentialsNonExpired = credentialsNonExpired;
+            return this;
+        }
+
+        public Builder withAccountNonLocked(boolean accountNonLocked) {
+            this.accountNonLocked = accountNonLocked;
+            return this;
+        }
+
+        public Builder withAuthorities(Collection<? extends GrantedAuthority> authorities) {
+            this.authorities = authorities;
+            return this;
+        }
+
+        public BaseUserDTO build() {
+            return new BaseUserDTO(
+                this.id,
+                this.username,
+                this.password,
+                this.enabled,
+                this.accountNonExpired,
+                this.credentialsNonExpired,
+                this.accountNonLocked,
+                this.authorities
+            );
+        }
+    }
+}

@@ -12,20 +12,19 @@ package com.dct.model.exception;
  */
 @SuppressWarnings("unused")
 public abstract class BaseException extends RuntimeException {
-
-    private final Integer code;
     private final String entityName;
     private final String errorKey;
     private final Object[] args;
     private final Throwable error;
+    private final String originalMessage;
 
-    protected BaseException(Integer code, String entityName, String errorKey, Object[] args, Throwable error) {
+    protected BaseException(String entityName, String errorKey, Object[] args, Throwable error, String originalMessage) {
         super(entityName + '-' + errorKey, error);
-        this.code = code;
         this.entityName = entityName;
         this.errorKey = errorKey;
         this.args = args;
         this.error = error;
+        this.originalMessage = originalMessage;
     }
 
     public String getEntityName() {
@@ -44,60 +43,7 @@ public abstract class BaseException extends RuntimeException {
         return error;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-        private Integer code;
-        private String entityName;
-        private String errorKey;
-        private Object[] args;
-        private Throwable error;
-
-        public Builder code(Integer code) {
-            this.code = code;
-            return this;
-        }
-
-        public Builder entityName(String entityName) {
-            this.entityName = entityName;
-            return this;
-        }
-
-        public Builder errorKey(String errorKey) {
-            this.errorKey = errorKey;
-            return this;
-        }
-
-        public Builder args(Object[] args) {
-            this.args = args;
-            return this;
-        }
-
-        public Builder error(Throwable error) {
-            this.error = error;
-            return this;
-        }
-
-        public BaseAuthenticationException authenticationException() {
-            return new BaseAuthenticationException(code, entityName, errorKey, args, error);
-        }
-
-        public BaseBadRequestException badRequestException() {
-            return new BaseBadRequestException(code, entityName, errorKey, args, error);
-        }
-
-        public BaseBadRequestAlertException badRequestAlertException() {
-            return new BaseBadRequestAlertException(code, entityName, errorKey, args, error);
-        }
-
-        public BaseIllegalArgumentException illegalArgumentException() {
-            return new BaseIllegalArgumentException(code, entityName, errorKey, args, error);
-        }
+    public String getOriginalMessage() {
+        return originalMessage;
     }
 }

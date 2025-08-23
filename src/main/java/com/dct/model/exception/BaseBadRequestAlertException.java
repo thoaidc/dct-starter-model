@@ -1,19 +1,54 @@
 package com.dct.model.exception;
 
-import com.dct.model.constants.BaseHttpStatusConstants;
-
 @SuppressWarnings("unused")
 public class BaseBadRequestAlertException extends BaseException {
 
     public BaseBadRequestAlertException(String entityName, String errorKey) {
-        super(BaseHttpStatusConstants.INTERNAL_SERVER_ERROR, entityName, errorKey, null, null);
+        super(entityName, errorKey, null, null, null);
     }
 
-    public BaseBadRequestAlertException(Integer code, String entityName, String errorKey) {
-        super(code, entityName, errorKey, null, null);
+    private BaseBadRequestAlertException(String entityName, String errorKey, Object[] args, Throwable error, String message) {
+        super(entityName, errorKey, args, error, message);
     }
 
-    public BaseBadRequestAlertException(Integer code, String entityName, String errorKey, Object[] args, Throwable error) {
-        super(code, entityName, errorKey, args, error);
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String entityName;
+        private String errorKey;
+        private Object[] args;
+        private Throwable error;
+        private String originalMessage;
+
+        public Builder entityName(String entityName) {
+            this.entityName = entityName;
+            return this;
+        }
+
+        public Builder errorKey(String errorKey) {
+            this.errorKey = errorKey;
+            return this;
+        }
+
+        public Builder args(Object[] args) {
+            this.args = args;
+            return this;
+        }
+
+        public Builder error(Throwable error) {
+            this.error = error;
+            return this;
+        }
+
+        public Builder originalMessage(String originalMessage) {
+            this.originalMessage = originalMessage;
+            return this;
+        }
+
+        public BaseBadRequestAlertException build() {
+            return new BaseBadRequestAlertException(entityName, errorKey, args, error, originalMessage);
+        }
     }
 }

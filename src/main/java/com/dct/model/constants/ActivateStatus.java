@@ -6,4 +6,5 @@ public enum ActivateStatus {
     DISABLED;
 
     public final static String ENABLED_VALUE = "ENABLED";
+    public final static String DISABLED_VALUE = "DISABLED";
 }

@@ -6,13 +6,6 @@ package com.dct.model.constants;
  */
 @SuppressWarnings("unused")
 public interface BaseHttpStatusConstants {
-
-    // The status indicating successful processing of the request (in the case of valid input data and no system errors)
-    interface STATUS {
-        boolean SUCCESS = true;
-        boolean FAILED = false;
-    }
-
     int OK = 200; // Request success
     int CREATED = 201; // Resource created successfully
     int ACCEPTED = 202; // Request accepted and being processed

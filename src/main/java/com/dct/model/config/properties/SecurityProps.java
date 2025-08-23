@@ -1,5 +1,6 @@
 package com.dct.model.config.properties;
 
+import com.dct.model.constants.AuthenticationType;
 import com.dct.model.constants.BasePropertiesConstants;
 import com.dct.model.constants.BaseSecurityConstants;
 
@@ -29,22 +30,8 @@ public class SecurityProps {
     private boolean enabledTls;
     private Integer passwordEncryptFactor;
     private String[] publicRequestPatterns;
-
-    public boolean isEnabledTls() {
-        return enabledTls;
-    }
-
-    public void setEnabledTls(boolean enabledTls) {
-        this.enabledTls = enabledTls;
-    }
-
-    public Integer getPasswordEncryptFactor() {
-        return Optional.ofNullable(passwordEncryptFactor).orElse(BaseSecurityConstants.BCRYPT_COST_FACTOR);
-    }
-
-    public void setPasswordEncryptFactor(Integer passwordEncryptFactor) {
-        this.passwordEncryptFactor = passwordEncryptFactor;
-    }
+    private AuthenticationType authenticationType;
+    private JwtConfig jwt;
 
     public String[] getPublicRequestPatterns() {
         return Optional.ofNullable(publicRequestPatterns)
@@ -53,5 +40,52 @@ public class SecurityProps {
 
     public void setPublicRequestPatterns(String[] publicRequestPatterns) {
         this.publicRequestPatterns = publicRequestPatterns;
+    }
+
+    public AuthenticationType getAuthenticationType() {
+        return authenticationType;
+    }
+
+    public void setAuthenticationType(AuthenticationType authenticationType) {
+        this.authenticationType = authenticationType;
+    }
+
+    public JwtConfig getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(JwtConfig jwt) {
+        this.jwt = jwt;
+    }
+
+    public static class JwtConfig {
+
+        private String base64SecretKey;
+        private Long validity;
+        private Long validityForRemember;
+
+        public String getBase64SecretKey() {
+            return base64SecretKey;
+        }
+
+        public void setBase64SecretKey(String base64SecretKey) {
+            this.base64SecretKey = base64SecretKey;
+        }
+
+        public Long getValidity() {
+            return validity;
+        }
+
+        public void setValidity(Long validity) {
+            this.validity = validity;
+        }
+
+        public Long getValidityForRemember() {
+            return validityForRemember;
+        }
+
+        public void setValidityForRemember(Long validityForRemember) {
+            this.validityForRemember = validityForRemember;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.dct.model.config.properties;
 
+import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BasePropertiesConstants;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +23,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = BasePropertiesConstants.RESOURCE_CONFIG)
 public class ResourceProps {
 
+    private ActivateStatus activate;
     private StaticResource staticResource;
     private UploadResource uploadResource;
+
+    public ActivateStatus getActivate() {
+        return activate;
+    }
+
+    public void setActivate(ActivateStatus activate) {
+        this.activate = activate;
+    }
 
     public StaticResource getStaticResource() {
         return staticResource;
@@ -64,17 +74,8 @@ public class ResourceProps {
     }
 
     public static class UploadResource {
-        private String[] acceptFormats;
         private String[] patterns;
         private String[] locations;
-
-        public String[] getAcceptFormats() {
-            return acceptFormats;
-        }
-
-        public void setAcceptFormats(String[] acceptFormats) {
-            this.acceptFormats = acceptFormats;
-        }
 
         public String[] getPatterns() {
             return patterns;
