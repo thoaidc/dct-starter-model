@@ -21,12 +21,11 @@ import org.springframework.context.annotation.Bean;
 public class DataConverterAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DataConverterAutoConfiguration.class);
-    private static final String ENTITY_NAME = "DataConverterAutoConfiguration";
 
     @Bean
     @ConditionalOnMissingBean(ObjectMapper.class)
     public ObjectMapper objectMapper() {
-        log.debug("[{}] - Auto configure default object mapper", ENTITY_NAME);
+        log.debug("[OBJECT_MAPPER_AUTO_CONFIG] - Auto configure default object mapper");
         return buildObjectMapper();
     }
 

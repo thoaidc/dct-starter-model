@@ -17,7 +17,7 @@ public interface BasePropertiesConstants {
 
     String I18N_CONFIG = "app.i18n";
     String SOCKET_CONFIG = "app.socket";
-    String ENABLED_SOCKET = "dct.base.features.socket";
+    String ENABLED_SOCKET = "app.socket.activate";
 
     String INTERCEPTOR_CONFIG = "app.interceptors";
     String ENABLED_INTERCEPTOR_CONFIG = "app.interceptors.activate";
@@ -27,8 +27,8 @@ public interface BasePropertiesConstants {
 
     String SECURITY_CONFIG = "app.security";
     String AUTHENTICATION_TYPE = "app.security.authentication-type";
-    String SECURITY_OAUTH2_CONFIG = "dct.base.security.oauth2";
-    String ENABLED_OAUTH2 = "dct.base.security.oauth2.enabled";
+    String SECURITY_OAUTH2_CONFIG = "app.security.oauth2";
+    String ENABLED_OAUTH2 = "app.security.oauth2.activate";
 
     String HTTP_CLIENT_CONFIG = "app.http-client";
     String CIRCUIT_BREAKER_CONFIG = "app.http-client.circuit-breaker";
