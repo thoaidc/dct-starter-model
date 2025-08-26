@@ -22,8 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.RESOURCE_CONFIG)
 public class ResourceProps {
-
-    private ActivateStatus activate;
+    private ActivateStatus activate = ActivateStatus.DISABLED;
     private StaticResource staticResource;
     private UploadResource uploadResource;
 

@@ -25,6 +25,15 @@ public interface BasePropertiesConstants {
     String RESOURCE_CONFIG = "app.resources";
     String ENABLED_RESOURCE = "app.resources.activate";
 
+    String CORS_CONFIG = "app.cors";
+    String ENABLED_CORS = "app.cors.activate";
+
+    String REDIS_CONFIG = "app.redis";
+    String ENABLED_REDIS = "app.redis.activate";
+
+    String RATE_LIMIT_CONFIG = "app.rate-limiter";
+    String ENABLED_RATE_LIMIT = "app.rate-limiter.activate";
+
     String SECURITY_CONFIG = "app.security";
     String AUTHENTICATION_TYPE = "app.security.authentication-type";
     String SECURITY_OAUTH2_CONFIG = "app.security.oauth2";

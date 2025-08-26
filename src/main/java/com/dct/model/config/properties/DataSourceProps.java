@@ -24,7 +24,6 @@ import org.springframework.util.StringUtils;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.DATASOURCE_CONFIG)
 public class DataSourceProps {
-
     private static final String ENTITY_NAME = "com.dct.model.config.properties.DataSourceProps";
     private String driverClassName;
     private String url;

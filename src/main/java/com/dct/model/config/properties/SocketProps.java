@@ -1,5 +1,6 @@
 package com.dct.model.config.properties;
 
+import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BaseCommonConstants;
 import com.dct.model.constants.BasePropertiesConstants;
 
@@ -24,9 +25,18 @@ import java.util.Optional;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.SOCKET_CONFIG)
 public class SocketProps {
+    private ActivateStatus activate = ActivateStatus.DISABLED;
     private String[] brokerPrefixes;
     private String[] applicationPrefixes;
     private String[] endpoints;
+
+    public ActivateStatus getActivate() {
+        return activate;
+    }
+
+    public void setActivate(ActivateStatus activate) {
+        this.activate = activate;
+    }
 
     public String[] getBrokerPrefixes() {
         return Optional.ofNullable(brokerPrefixes).orElse(BaseCommonConstants.Socket.DEFAULT_BROKER_PREFIXES);

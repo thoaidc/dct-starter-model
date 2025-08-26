@@ -22,8 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.CIRCUIT_BREAKER_RETRY_CONFIG)
 public class Resilience4jRetryProps {
-
-    private ActivateStatus activate;
+    private ActivateStatus activate = ActivateStatus.DISABLED;
     private int retryMaxAttempts;
     private int retryWaitDuration;
 

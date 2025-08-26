@@ -22,8 +22,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.HTTP_CLIENT_CONFIG)
 public class HttpClientProps {
-
-    private ActivateStatus restTemplate;
+    private ActivateStatus restTemplate = ActivateStatus.DISABLED;
     private int defaultConnectTimeout;
     private int defaultReadTimeout;
     private CircuitBreakerProps circuitBreaker;

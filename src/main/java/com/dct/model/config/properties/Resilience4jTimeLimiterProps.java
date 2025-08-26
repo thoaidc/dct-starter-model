@@ -22,8 +22,7 @@ import com.dct.model.constants.BasePropertiesConstants;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.CIRCUIT_BREAKER_TIME_LIMITER_CONFIG)
 public class Resilience4jTimeLimiterProps {
-
-    private ActivateStatus activate;
+    private ActivateStatus activate = ActivateStatus.DISABLED;
     private long overallTimeout;
     private boolean cancelRunningFuture;
 

@@ -22,8 +22,7 @@ import com.dct.model.constants.BasePropertiesConstants;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.CIRCUIT_BREAKER_CONFIG)
 public class CircuitBreakerProps {
-
-    private ActivateStatus activate;
+    private ActivateStatus activate = ActivateStatus.DISABLED;
     private float failureRateThreshold;
     private int minimumNumberOfCalls;
     private int slidingWindowSize;

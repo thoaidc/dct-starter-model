@@ -24,7 +24,6 @@ import java.util.Optional;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.I18N_CONFIG)
 public class I18nProps {
-
     private String[] baseNames;
     private String encoding;
 

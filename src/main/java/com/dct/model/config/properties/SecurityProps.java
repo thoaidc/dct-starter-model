@@ -28,11 +28,10 @@ import java.util.Optional;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.SECURITY_CONFIG)
 public class SecurityProps {
-
-    private ActivateStatus enabledTls;
+    private ActivateStatus enabledTls = ActivateStatus.DISABLED;
+    private AuthenticationType authenticationType = AuthenticationType.CUSTOM;
     private Integer passwordEncryptFactor;
     private String[] publicRequestPatterns;
-    private AuthenticationType authenticationType;
     private JwtConfig jwt;
     private OAuth2Config oauth2;
 
@@ -149,7 +148,7 @@ public class SecurityProps {
     }
 
     public static class OAuth2Config {
-        private ActivateStatus activate;
+        private ActivateStatus activate = ActivateStatus.DISABLED;
         private String baseAuthorizeUri;
         private List<OAuth2Config.ClientProps> clients;
 

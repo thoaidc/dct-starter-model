@@ -26,18 +26,8 @@ import java.util.Optional;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.INTERCEPTOR_CONFIG)
 public class InterceptorProps {
-
-    private CorsConfig cors;
-    private ActivateStatus activate;
+    private ActivateStatus activate = ActivateStatus.DISABLED;
     private List<InterceptorConfig> chain;
-
-    public CorsConfig getCors() {
-        return cors;
-    }
-
-    public void setCors(CorsConfig cors) {
-        this.cors = cors;
-    }
 
     public ActivateStatus getActivate() {
         return activate;
@@ -53,54 +43,6 @@ public class InterceptorProps {
 
     public void setChain(List<InterceptorConfig> chain) {
         this.chain = chain;
-    }
-
-    public static class CorsConfig {
-        private List<String> applyFor;
-        private List<String> allowedOriginPatterns;
-        private List<String> allowedHeaders;
-        private List<String> allowedMethods;
-        private Boolean allowedCredentials;
-
-        public List<String> getApplyFor() {
-            return applyFor;
-        }
-
-        public void setApplyFor(List<String> applyFor) {
-            this.applyFor = applyFor;
-        }
-
-        public List<String> getAllowedOriginPatterns() {
-            return allowedOriginPatterns;
-        }
-
-        public void setAllowedOriginPatterns(List<String> allowedOriginPatterns) {
-            this.allowedOriginPatterns = allowedOriginPatterns;
-        }
-
-        public List<String> getAllowedHeaders() {
-            return allowedHeaders;
-        }
-
-        public void setAllowedHeaders(List<String> allowedHeaders) {
-            this.allowedHeaders = allowedHeaders;
-        }
-
-        public List<String> getAllowedMethods() {
-            return allowedMethods;
-        }
-
-        public void setAllowedMethods(List<String> allowedMethods) {
-            this.allowedMethods = allowedMethods;
-        }
-
-        public Boolean isAllowedCredentials() {
-            return allowedCredentials;
-        }
-
-        public void setAllowedCredentials(Boolean allowedCredentials) {
-            this.allowedCredentials = allowedCredentials;
-        }
     }
 
     public static class InterceptorConfig {

@@ -22,7 +22,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.HIKARI_DATASOURCE_CONFIG)
 public class HikariDataSourceProps {
-
     private boolean cachePrepStmts;
     private boolean useServerPrepStmts;
     private int prepStmtCacheSize;

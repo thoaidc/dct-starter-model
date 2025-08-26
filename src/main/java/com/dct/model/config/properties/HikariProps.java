@@ -23,7 +23,6 @@ import org.springframework.util.StringUtils;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.HIKARI_CONFIG)
 public class HikariProps {
-
     private String poolName;
     private boolean autoCommit;
     private boolean allowPoolSuspension;

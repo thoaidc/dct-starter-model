@@ -9,9 +9,9 @@ import java.util.HashSet;
 @SuppressWarnings("unused")
 public class BaseUserDTO extends User {
 
-    private final Long id;
+    private final Integer id;
 
-    private BaseUserDTO(Long id,
+    private BaseUserDTO(Integer id,
                         String username,
                         String password,
                         boolean enabled,
@@ -23,7 +23,7 @@ public class BaseUserDTO extends User {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class BaseUserDTO extends User {
     }
 
     public static class Builder {
-        private Long id;
+        private Integer id;
         private String username;
         private String password;
         private boolean enabled = true;
@@ -41,7 +41,7 @@ public class BaseUserDTO extends User {
         private boolean accountNonLocked = true;
         private Collection<? extends GrantedAuthority> authorities = new HashSet<>();
 
-        public Builder withId(Long id) {
+        public Builder withId(Integer id) {
             this.id = id;
             return this;
         }
