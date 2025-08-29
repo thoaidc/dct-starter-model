@@ -27,13 +27,14 @@ public interface BaseSecurityConstants {
     interface COOKIES {
         // The key of the cookie storing the JWT token, which is HTTP-only
         // This cookie is automatically sent with requests by browser but cannot be accessed by JavaScript
-        String HTTP_ONLY_COOKIE_ACCESS_TOKEN = "dct_access_token";
+        String HTTP_ONLY_TOKEN = "dct_access_token";
     }
 
     interface HEADER {
         // The request header storing the JWT token, used in cases where the token is not found in the HTTP-only cookies
         String AUTHORIZATION_HEADER = "Authorization";
         String AUTHORIZATION_GATEWAY_HEADER = "Authorization-Gateway";
+        String AUTHORIZATION_WEBSOCKET = "token";
         String TOKEN_TYPE = "Bearer "; // JWT token type
         String USER_ID = "X-User-ID";
         String USER_NAME = "X-User-Name";

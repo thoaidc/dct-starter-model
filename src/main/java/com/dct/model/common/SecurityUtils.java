@@ -4,6 +4,9 @@ import com.dct.model.constants.BaseHttpStatusConstants;
 import com.dct.model.constants.BaseSecurityConstants;
 import com.dct.model.dto.response.BaseResponseDTO;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +19,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.util.pattern.PathPatternParser;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 @SuppressWarnings("unused")
@@ -40,7 +44,31 @@ public class SecurityUtils {
                 .anyMatch(p -> p.matches(PathContainer.parsePath(requestUri)));
     }
 
-    public static String retrieveTokenFromHeader(ServerHttpRequest request) {
+    public static String retrieveToken(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        String bearerToken = null;
+
+        if (Objects.nonNull(cookies)) {
+            bearerToken = Arrays.stream(cookies)
+                    .filter(cookie -> BaseSecurityConstants.COOKIES.HTTP_ONLY_TOKEN.equals(cookie.getName()))
+                    .findFirst()
+                    .map(Cookie::getValue)
+                    .orElse(null);
+        }
+
+        if (!StringUtils.hasText(bearerToken))
+            bearerToken = request.getHeader(BaseSecurityConstants.HEADER.AUTHORIZATION_HEADER);
+
+        if (!StringUtils.hasText(bearerToken))
+            bearerToken = request.getHeader(BaseSecurityConstants.HEADER.AUTHORIZATION_GATEWAY_HEADER);
+
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BaseSecurityConstants.HEADER.TOKEN_TYPE))
+            return bearerToken.substring(BaseSecurityConstants.HEADER.TOKEN_TYPE.length());
+
+        return bearerToken;
+    }
+
+    public static String retrieveTokenWebFlux(ServerHttpRequest request) {
         // Extract from Authorization header
         String authHeader = request.getHeaders().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_HEADER);
 
@@ -49,7 +77,7 @@ public class SecurityUtils {
         }
 
         // Extract from query parameter (for WebSocket)
-        return request.getQueryParams().getFirst("token");
+        return request.getQueryParams().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_WEBSOCKET);
     }
 
     public static String convertUnAuthorizeError(ServerHttpResponse response, String message) {
