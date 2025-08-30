@@ -31,6 +31,9 @@ public interface BasePropertiesConstants {
     String REDIS_CONFIG = "app.redis";
     String ENABLED_REDIS = "app.redis.activate";
 
+    String RABBIT_MQ_CONFIG = "app.rabbitmq";
+    String ENABLED_RABBIT_MQ = "app.rabbitmq.activate";
+
     String RATE_LIMIT_CONFIG = "app.rate-limiter";
     String ENABLED_RATE_LIMIT = "app.rate-limiter.activate";
 
