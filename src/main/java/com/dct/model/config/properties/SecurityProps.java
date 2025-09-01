@@ -8,8 +8,8 @@ import com.dct.model.constants.BaseSecurityConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Contains security configurations such as the secret key<p>
@@ -30,10 +30,10 @@ import java.util.Optional;
 public class SecurityProps {
     private ActivateStatus enabledTls = ActivateStatus.DISABLED;
     private AuthenticationType authenticationType = AuthenticationType.CUSTOM;
-    private Integer passwordEncryptFactor;
-    private String[] publicRequestPatterns;
-    private JwtConfig jwt;
-    private OAuth2Config oauth2;
+    private Integer passwordEncryptFactor = BaseSecurityConstants.DEFAULT_BCRYPT_COST_FACTOR;
+    private String[] publicRequestPatterns = BaseSecurityConstants.REQUEST_MATCHERS.DEFAULT_PUBLIC_API_PATTERNS;
+    private JwtConfig jwt = new JwtConfig();
+    private OAuth2Config oauth2 = new OAuth2Config();
 
     public ActivateStatus getEnabledTls() {
         return enabledTls;
@@ -52,8 +52,7 @@ public class SecurityProps {
     }
 
     public String[] getPublicRequestPatterns() {
-        return Optional.ofNullable(publicRequestPatterns)
-                .orElse(BaseSecurityConstants.REQUEST_MATCHERS.DEFAULT_PUBLIC_API_PATTERNS);
+        return publicRequestPatterns;
     }
 
     public void setPublicRequestPatterns(String[] publicRequestPatterns) {
@@ -85,9 +84,8 @@ public class SecurityProps {
     }
 
     public static class JwtConfig {
-        private AccessToken accessToken;
-        private RefreshToken refreshToken;
-        private String base64SecretKey;
+        private AccessToken accessToken = new AccessToken();
+        private RefreshToken refreshToken = new RefreshToken();
 
         public AccessToken getAccessToken() {
             return accessToken;
@@ -105,44 +103,54 @@ public class SecurityProps {
             this.refreshToken = refreshToken;
         }
 
-        public String getBase64SecretKey() {
-            return base64SecretKey;
-        }
-
-        public void setBase64SecretKey(String base64SecretKey) {
-            this.base64SecretKey = base64SecretKey;
-        }
-
         public static class AccessToken {
-            private Long validity;
+            private long validity = BaseSecurityConstants.JWT.DEFAULT_ACCESS_TOKEN_VALIDITY;
+            private String base64SecretKey;
 
-            public Long getValidity() {
+            public long getValidity() {
                 return validity;
             }
 
-            public void setValidity(Long validity) {
+            public void setValidity(long validity) {
                 this.validity = validity;
+            }
+
+            public String getBase64SecretKey() {
+                return base64SecretKey;
+            }
+
+            public void setBase64SecretKey(String base64SecretKey) {
+                this.base64SecretKey = base64SecretKey;
             }
         }
 
         public static class RefreshToken {
-            private Long validity;
-            private Long validityForRemember;
+            private String base64SecretKey;
+            private long validity = BaseSecurityConstants.JWT.DEFAULT_REFRESH_TOKEN_VALIDITY;
+            private long validityForRemember = BaseSecurityConstants.JWT.DEFAULT_REFRESH_TOKEN_VALIDITY_FOR_REMEMBER;
 
-            public Long getValidity() {
+            public long getValidity() {
                 return validity;
             }
 
-            public void setValidity(Long validity) {
+            public void setValidity(long validity) {
                 this.validity = validity;
             }
 
-            public Long getValidityForRemember() {
+            public long getValidityForRemember() {
                 return validityForRemember;
             }
 
-            public void setValidityForRemember(Long validityForRemember) {
+            public void setValidityForRemember(long validityForRemember) {
                 this.validityForRemember = validityForRemember;
+            }
+
+            public String getBase64SecretKey() {
+                return base64SecretKey;
+            }
+
+            public void setBase64SecretKey(String base64SecretKey) {
+                this.base64SecretKey = base64SecretKey;
             }
         }
     }
@@ -150,7 +158,7 @@ public class SecurityProps {
     public static class OAuth2Config {
         private ActivateStatus activate = ActivateStatus.DISABLED;
         private String baseAuthorizeUri;
-        private List<OAuth2Config.ClientProps> clients;
+        private List<OAuth2Config.ClientProps> clients = new ArrayList<>();
 
         public ActivateStatus getActivate() {
             return activate;

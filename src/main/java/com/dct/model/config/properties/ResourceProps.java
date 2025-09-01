@@ -23,8 +23,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = BasePropertiesConstants.RESOURCE_CONFIG)
 public class ResourceProps {
     private ActivateStatus activate = ActivateStatus.DISABLED;
-    private StaticResource staticResource;
-    private UploadResource uploadResource;
+    private StaticResource staticResource = new StaticResource();
+    private UploadResource uploadResource = new UploadResource();
 
     public ActivateStatus getActivate() {
         return activate;
@@ -51,7 +51,6 @@ public class ResourceProps {
     }
 
     public static class StaticResource {
-
         private String[] patterns;
         private String[] locations;
 

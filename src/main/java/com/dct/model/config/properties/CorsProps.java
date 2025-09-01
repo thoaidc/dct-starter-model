@@ -2,6 +2,7 @@ package com.dct.model.config.properties;
 
 import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BasePropertiesConstants;
+import com.dct.model.constants.BaseSecurityConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -45,11 +46,11 @@ public class CorsProps {
     }
 
     public static class CorsMapping {
-        private List<String> allowedOrigins;
-        private List<String> allowedMethods;
-        private List<String> allowedHeaders;
-        private Boolean allowCredentials;
-        private Long maxAge;
+        private List<String> allowedOrigins = List.of(BaseSecurityConstants.CORS.DEFAULT_ALLOWED_ORIGIN_PATTERNS);
+        private List<String> allowedMethods = List.of(BaseSecurityConstants.CORS.DEFAULT_ALLOWED_REQUEST_METHODS);
+        private List<String> allowedHeaders = List.of(BaseSecurityConstants.CORS.DEFAULT_ALLOWED_HEADERS);
+        private boolean allowCredentials = BaseSecurityConstants.CORS.DEFAULT_ALLOW_CREDENTIALS;
+        private long maxAge = BaseSecurityConstants.CORS.DEFAULT_MAX_AGE;
 
         public List<String> getAllowedOrigins() {
             return allowedOrigins;

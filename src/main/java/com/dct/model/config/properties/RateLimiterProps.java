@@ -2,9 +2,11 @@ package com.dct.model.config.properties;
 
 import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BasePropertiesConstants;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,8 +27,8 @@ import java.util.List;
 public class RateLimiterProps {
     private ActivateStatus activate = ActivateStatus.DISABLED;
     private boolean ipValidationEnabled = true;
-    private List<String> excludedIps;
-    private List<String> excludedIpPrefixes;
+    private List<String> excludedIps = new ArrayList<>();
+    private List<String> excludedIpPrefixes = new ArrayList<>();
 
     public ActivateStatus getActivate() {
         return activate;

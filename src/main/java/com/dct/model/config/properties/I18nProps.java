@@ -6,8 +6,6 @@ import com.dct.model.constants.BasePropertiesConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.Optional;
-
 /**
  * When the application starts, Spring will automatically create an instance of this class
  * and load the values from configuration files like application.properties or application.yml <p>
@@ -24,11 +22,11 @@ import java.util.Optional;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.I18N_CONFIG)
 public class I18nProps {
-    private String[] baseNames;
-    private String encoding;
+    private String[] baseNames = BaseCommonConstants.DEFAULT_MESSAGE_SOURCE_BASENAME;
+    private String encoding = BaseCommonConstants.DEFAULT_MESSAGE_SOURCE_ENCODING;
 
     public String[] getBaseNames() {
-        return Optional.ofNullable(baseNames).orElse(BaseCommonConstants.DEFAULT_MESSAGE_SOURCE_BASENAME);
+        return baseNames;
     }
 
     public void setBaseNames(String[] baseNames) {
@@ -36,7 +34,7 @@ public class I18nProps {
     }
 
     public String getEncoding() {
-        return Optional.ofNullable(encoding).orElse(BaseCommonConstants.DEFAULT_MESSAGE_SOURCE_ENCODING);
+        return encoding;
     }
 
     public void setEncoding(String encoding) {

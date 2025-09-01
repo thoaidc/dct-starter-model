@@ -2,9 +2,11 @@ package com.dct.model.config.properties;
 
 import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BasePropertiesConstants;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,16 +25,16 @@ import java.util.Map;
 @SuppressWarnings({"ConfigurationProperties", "unused"})
 @ConfigurationProperties(prefix = BasePropertiesConstants.RABBIT_MQ_CONFIG)
 public class RabbitMQProps {
-    private ActivateStatus activate;
-    private String[] servers;
-    private int port;
-    private String virtualHost;
+    private ActivateStatus activate = ActivateStatus.DISABLED;
+    private String[] servers = { "localhost" };
+    private String virtualHost = "default";
+    private int port = 5672;
     private String username;
     private String password;
-    private Exchange exchange;
-    private Map<String, Queue> queues;
-    private Consumer consumer;
-    private Producer producer;
+    private Exchange exchange = new Exchange();
+    private Producer producer = new Producer();
+    private Consumer consumer = new Consumer();
+    private Map<String, Queue> queues = new HashMap<>();
 
     public ActivateStatus getActivate() {
         return activate;
@@ -115,9 +117,9 @@ public class RabbitMQProps {
     }
 
     public static class Exchange {
-        private String direct;
-        private String topic;
-        private String fanout;
+        private String direct = "amq.direct";
+        private String topic = "amq.topic";
+        private String fanout = "amq.fanout";
 
         public String getDirect() {
             return direct;

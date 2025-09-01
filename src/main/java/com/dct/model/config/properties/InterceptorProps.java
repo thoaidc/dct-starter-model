@@ -6,6 +6,7 @@ import com.dct.model.constants.BasePropertiesConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ import java.util.Optional;
 @ConfigurationProperties(prefix = BasePropertiesConstants.INTERCEPTOR_CONFIG)
 public class InterceptorProps {
     private ActivateStatus activate = ActivateStatus.DISABLED;
-    private List<InterceptorConfig> chain;
+    private List<InterceptorConfig> chain = new ArrayList<>();
 
     public ActivateStatus getActivate() {
         return activate;

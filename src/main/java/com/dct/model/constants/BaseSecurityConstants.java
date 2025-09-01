@@ -7,7 +7,7 @@ public interface BaseSecurityConstants {
 
     // The encryption complexity in PasswordEncoder's algorithm (between 4 and 31)
     // Higher values mean the password is harder to attack, but too high will reduce performance
-    int BCRYPT_COST_FACTOR = 12;
+    int DEFAULT_BCRYPT_COST_FACTOR = 12;
 
     interface JWT {
         long DEFAULT_ACCESS_TOKEN_VALIDITY = 5 * 60 * 1000L; // 5 minutes
@@ -27,7 +27,7 @@ public interface BaseSecurityConstants {
     interface COOKIES {
         // The key of the cookie storing the JWT token, which is HTTP-only
         // This cookie is automatically sent with requests by browser but cannot be accessed by JavaScript
-        String HTTP_ONLY_TOKEN = "dct_access_token";
+        String HTTP_ONLY_TOKEN = "dct_refresh_token";
     }
 
     interface HEADER {
@@ -48,16 +48,12 @@ public interface BaseSecurityConstants {
      */
     interface REQUEST_MATCHERS {
         String[] DEFAULT_PUBLIC_API_PATTERNS = {
-            "/",
             "/**.html",
             "/**.css",
             "/**.js",
             "/**.ico",
             "/i18n/**",
-            "/register",
-            "/p/**",
-            "/api/p/**",
-            "/login/**"
+            "/api/p/**"
         };
     }
 
@@ -89,6 +85,7 @@ public interface BaseSecurityConstants {
 
         String[] DEFAULT_ALLOWED_ORIGIN_PATTERNS = {"*"}; // The list of domains allowed to access the resources. * means all
         boolean DEFAULT_ALLOW_CREDENTIALS = true; // Allow sending cookies or authentication information
+        long DEFAULT_MAX_AGE = 3600;
     }
 
     interface Role {

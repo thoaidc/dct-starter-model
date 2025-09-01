@@ -2,6 +2,7 @@ package com.dct.model.config.properties;
 
 import com.dct.model.constants.ActivateStatus;
 import com.dct.model.constants.BasePropertiesConstants;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -22,16 +23,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = BasePropertiesConstants.REDIS_CONFIG)
 public class RedisProps {
     private ActivateStatus activate = ActivateStatus.DISABLED;
-    private int ttlMinutes;
-    private String host;
+    private String host = "localhost";
     private String username;
     private String password;
+    private int port = 6379;
     private int database;
-    private int port;
+    private int ttlMinutes = 5;
     private long commandTimeout;
     private long shutdownTimeout;
     private long connectionTimeout;
-    private boolean autoReconnect;
+    private boolean autoReconnect = true;
 
     public ActivateStatus getActivate() {
         return activate;
