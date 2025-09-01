@@ -1,6 +1,6 @@
 package com.dct.model.dto.request;
 
-import com.dct.model.constants.BaseDatetimeConstants;
+import com.dct.model.common.BaseCommon;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +11,6 @@ import org.springframework.util.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
@@ -23,7 +19,6 @@ import java.util.Objects;
  */
 @SuppressWarnings("unused")
 public class BaseRequestDTO implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(BaseRequestDTO.class);
@@ -62,35 +57,11 @@ public class BaseRequestDTO implements Serializable {
     }
 
     public String getFromDateSearch() {
-        if (StringUtils.hasText(fromDate)) {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(BaseDatetimeConstants.Formatter.DEFAULT);
-                LocalDateTime localDateTime = LocalDateTime.parse(fromDate, formatter)
-                        .atZone(ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH))
-                        .toLocalDateTime();
-                return formatter.withZone(ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH)).format(localDateTime);
-            } catch (DateTimeParseException e) {
-                log.error("[ERROR_CONVERT_FROM_DATE_REQUEST] - fromDate = {} from request: {}", fromDate, e.getMessage());
-            }
-        }
-
-        return null;
+        return BaseCommon.convertDateTimeSearch(fromDate);
     }
 
     public String getToDateSearch() {
-        if (StringUtils.hasText(toDate)) {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(BaseDatetimeConstants.Formatter.DEFAULT);
-                LocalDateTime localDateTime = LocalDateTime.parse(toDate, formatter)
-                        .atZone(ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH))
-                        .toLocalDateTime();
-                return formatter.withZone(ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH)).format(localDateTime);
-            } catch (DateTimeParseException e) {
-                log.error("[ERROR_CONVERT_TO_DATE_REQUEST] - toDate = {} from request: {}", toDate, e.getMessage());
-            }
-        }
-
-        return null;
+        return BaseCommon.convertDateTimeSearch(toDate);
     }
 
     public String getStatusSearch(String regex) {
