@@ -3,9 +3,9 @@ package com.dct.model.constants;
 @SuppressWarnings("unused")
 public interface BaseUserConstants {
     interface Status {
-        Short INACTIVE = 0;
-        Short ACTIVE = 1;
-        Short LOCKED = 2;
-        Short DELETED = 3;
+        byte INACTIVE = 0;
+        byte ACTIVE = 1;
+        byte LOCKED = 2;
+        byte DELETED = 3;
     }
 }

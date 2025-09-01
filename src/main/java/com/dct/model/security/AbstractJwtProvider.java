@@ -26,17 +26,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
-public abstract class BaseJwtProvider {
+public abstract class AbstractJwtProvider {
 
-    private static final Logger log = LoggerFactory.getLogger(BaseJwtProvider.class);
-    private static final String ENTITY_NAME = "com.dct.model.security.filter.BaseJwtProvider";
+    private static final Logger log = LoggerFactory.getLogger(AbstractJwtProvider.class);
+    private static final String ENTITY_NAME = "com.dct.model.security.filter.AbstractJwtProvider";
     protected final SecretKey secretKey;
     protected final JwtParser jwtParser;
     protected final long ACCESS_TOKEN_VALIDITY;
     protected final long REFRESH_TOKEN_VALIDITY;
     protected final long REFRESH_TOKEN_VALIDITY_FOR_REMEMBER;
 
-    public BaseJwtProvider(SecurityProps securityProps) {
+    public AbstractJwtProvider(SecurityProps securityProps) {
         SecurityProps.JwtConfig jwtConfig = Optional.ofNullable(securityProps).orElse(new SecurityProps()).getJwt();
 
         if (Objects.isNull(jwtConfig)) {

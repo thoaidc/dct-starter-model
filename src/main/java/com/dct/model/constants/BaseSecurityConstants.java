@@ -90,4 +90,9 @@ public interface BaseSecurityConstants {
         String[] DEFAULT_ALLOWED_ORIGIN_PATTERNS = {"*"}; // The list of domains allowed to access the resources. * means all
         boolean DEFAULT_ALLOW_CREDENTIALS = true; // Allow sending cookies or authentication information
     }
+
+    interface Role {
+        String DEFAULT = "ROLE_DEFAULT";
+        String SUPER_ADMIN = "ROLE_ADMIN";
+    }
 }
