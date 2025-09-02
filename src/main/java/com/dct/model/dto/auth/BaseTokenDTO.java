@@ -1,6 +1,7 @@
 package com.dct.model.dto.auth;
 
-import org.springframework.security.core.Authentication;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User information after successful authentication, used to generate the access token
@@ -10,11 +11,10 @@ import org.springframework.security.core.Authentication;
  */
 @SuppressWarnings("unused")
 public class BaseTokenDTO {
-
-    private Authentication authentication; // Contains user authorities information
-    private String username;
     private Integer userId;
+    private String username;
     private Boolean isRememberMe = false;
+    private Set<String> authorities = new HashSet<>();
 
     public static Builder builder() {
         return new Builder();
@@ -22,11 +22,6 @@ public class BaseTokenDTO {
 
     public static class Builder {
         private final BaseTokenDTO instance = new BaseTokenDTO();
-
-        public Builder authentication(Authentication authentication) {
-            instance.authentication = authentication;
-            return this;
-        }
 
         public Builder username(String username) {
             instance.username = username;
@@ -38,6 +33,11 @@ public class BaseTokenDTO {
             return this;
         }
 
+        public Builder authorities(Set<String> authorities) {
+            instance.authorities = authorities;
+            return this;
+        }
+
         public Builder rememberMe(boolean rememberMe) {
             instance.isRememberMe = rememberMe;
             return this;
@@ -46,16 +46,6 @@ public class BaseTokenDTO {
         public BaseTokenDTO build() {
             return instance;
         }
-    }
-
-    public BaseTokenDTO() {}
-
-    public Authentication getAuthentication() {
-        return authentication;
-    }
-
-    public void setAuthentication(Authentication authentication) {
-        this.authentication = authentication;
     }
 
     public String getUsername() {
@@ -84,5 +74,13 @@ public class BaseTokenDTO {
 
     public void setRememberMe(Boolean rememberMe) {
         isRememberMe = rememberMe;
+    }
+
+    public Set<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<String> authorities) {
+        this.authorities = authorities;
     }
 }

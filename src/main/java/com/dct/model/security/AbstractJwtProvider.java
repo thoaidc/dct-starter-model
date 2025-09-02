@@ -91,18 +91,16 @@ public abstract class AbstractJwtProvider {
         Integer userId = (Integer) claims.get(BaseSecurityConstants.TOKEN_PAYLOAD.USER_ID);
         String username = (String) claims.get(BaseSecurityConstants.TOKEN_PAYLOAD.USERNAME);
         String authorities = (String) claims.get(BaseSecurityConstants.TOKEN_PAYLOAD.AUTHORITIES);
-
         Set<SimpleGrantedAuthority> userAuthorities = Arrays.stream(authorities.split(","))
                 .filter(StringUtils::hasText)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
-
         BaseUserDTO principal = BaseUserDTO.userBuilder()
                 .withId(userId)
                 .withUsername(username)
+                .withPassword(username) // Not used but needed to avoid `null` error in User of spring security
                 .withAuthorities(userAuthorities)
                 .build();
-
         return new UsernamePasswordAuthenticationToken(principal, username, userAuthorities);
     }
 }
