@@ -1,12 +1,15 @@
 package com.dct.model.common;
 
+import com.dct.model.constants.BaseCommonConstants;
 import com.dct.model.constants.BaseDatetimeConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Field;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +22,21 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class BaseCommon {
     private static final Logger log = LoggerFactory.getLogger(BaseCommon.class);
+
+    public static String normalizeName(String input) {
+        String result = Objects.nonNull(input) ? input.trim().toLowerCase() : "";
+
+        // Replace special characters
+        for (Map.Entry<String, String> entry : BaseCommonConstants.EXTRA_CHAR_MAP.entrySet()) {
+            result = result.replace(entry.getKey(), entry.getValue());
+        }
+
+        // Unicode standardization -> remove accents
+        result = Normalizer.normalize(result, Normalizer.Form.NFD);
+        result = result.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        // Keep only a-z0-9 characters
+        return result.replaceAll("[^a-z0-9]", "");
+    }
 
     public static String convertDateTimeSearch(String datetime) {
         if (!StringUtils.hasText(datetime)) {

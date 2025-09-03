@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class PermissionTreeNode implements Serializable {
+public class AuthorityTreeNode implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -17,7 +17,7 @@ public class PermissionTreeNode implements Serializable {
     private boolean checked;
     private boolean collapsed;
     private Integer parentId;
-    private List<PermissionTreeNode> children = new ArrayList<>();
+    private List<AuthorityTreeNode> children = new ArrayList<>();
 
     public static Builder builder() {
         return new Builder();
@@ -25,7 +25,7 @@ public class PermissionTreeNode implements Serializable {
 
     public static class Builder {
 
-        private final PermissionTreeNode instance = new PermissionTreeNode();
+        private final AuthorityTreeNode instance = new AuthorityTreeNode();
 
         public Builder id(Integer id) {
             instance.setId(id);
@@ -62,22 +62,22 @@ public class PermissionTreeNode implements Serializable {
             return this;
         }
 
-        public Builder children(List<PermissionTreeNode> children) {
+        public Builder children(List<AuthorityTreeNode> children) {
             instance.setChildren(children);
             return this;
         }
 
-        public Builder appendChild(PermissionTreeNode node) {
+        public Builder appendChild(AuthorityTreeNode node) {
             instance.appendChildren(node);
             return this;
         }
 
-        public PermissionTreeNode build() {
+        public AuthorityTreeNode build() {
             return instance;
         }
     }
 
-    public void appendChildren(PermissionTreeNode node) {
+    public void appendChildren(AuthorityTreeNode node) {
         this.children.add(node);
     }
 
@@ -137,11 +137,11 @@ public class PermissionTreeNode implements Serializable {
         this.parentId = parentId;
     }
 
-    public List<PermissionTreeNode> getChildren() {
+    public List<AuthorityTreeNode> getChildren() {
         return children;
     }
 
-    public void setChildren(List<PermissionTreeNode> children) {
+    public void setChildren(List<AuthorityTreeNode> children) {
         this.children = children;
     }
 }

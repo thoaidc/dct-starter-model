@@ -1,5 +1,7 @@
 package com.dct.model.constants;
 
+import java.util.Map;
+
 /**
  * Contains the common configuration constants for the project without security configurations
  * @author thoaidc
@@ -92,4 +94,20 @@ public interface BaseCommonConstants {
         String[] DEFAULT_APPLICATION_PREFIXES = { "/api/ws" };
         String[] DEFAULT_ENDPOINTS = { "/ws" };
     }
+
+    Map<String, String> EXTRA_CHAR_MAP = Map.ofEntries(
+        Map.entry("đ", "d"),
+        Map.entry("Đ", "d"),
+        Map.entry("ß", "ss"),
+        Map.entry("Æ", "ae"),
+        Map.entry("æ", "ae"),
+        Map.entry("Œ", "oe"),
+        Map.entry("œ", "oe"),
+        Map.entry("Ø", "o"),
+        Map.entry("ø", "o"),
+        Map.entry("Ł", "l"),
+        Map.entry("ł", "l"),
+        Map.entry("Þ", "th"),
+        Map.entry("þ", "th")
+    );
 }

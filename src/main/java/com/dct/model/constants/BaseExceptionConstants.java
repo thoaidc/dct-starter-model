@@ -51,8 +51,8 @@ public interface BaseExceptionConstants {
     // Role
     String ROLE_NOT_FOUND = "exception.role.notFound";
     String ROLE_EXISTED = "exception.role.existed";
-    String ROLE_PERMISSIONS_NOT_EMPTY = "exception.role.permissions.notEmpty";
-    String ROLE_PERMISSION_INVALID = "exception.role.permission.invalidList";
+    String ROLE_AUTHORITIES_NOT_EMPTY = "exception.role.authorities.notEmpty";
+    String ROLE_AUTHORITY_INVALID = "exception.role.authorities.invalidList";
 
     // Form data request
     String DATA_INVALID = "exception.data.invalid";
