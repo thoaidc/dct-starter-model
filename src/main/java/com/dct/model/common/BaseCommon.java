@@ -45,17 +45,14 @@ public class BaseCommon {
 
         ZoneId zoneId = ZoneId.of(BaseDatetimeConstants.ZoneID.ASIA_HO_CHI_MINH);
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("yyyy[-/MM]-dd")
-                .optionalStart()
-                .appendLiteral(' ')
-                .appendPattern("HH:mm")
-                .optionalStart()
-                .appendPattern(":ss")
-                .optionalEnd()
-                .optionalEnd()
-                .toFormatter()
-                .withZone(zoneId);
-
+                .appendPattern("yyyy")
+                .optionalStart().appendPattern("-MM").optionalEnd()
+                .optionalStart().appendPattern("/MM").optionalEnd()
+                .optionalStart().appendPattern("-dd").optionalEnd()
+                .optionalStart().appendPattern("/dd").optionalEnd()
+                .optionalStart().appendLiteral(' ').appendPattern("HH:mm").optionalEnd()
+                .optionalStart().appendPattern(":ss").optionalEnd()
+                .toFormatter();
         try {
             DateTimeFormatter formatterTarget = DateTimeFormatter.ofPattern(BaseDatetimeConstants.Formatter.DEFAULT);
             LocalDateTime localDateTime = LocalDateTime.parse(datetime, formatter).atZone(zoneId).toLocalDateTime();

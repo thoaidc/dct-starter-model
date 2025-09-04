@@ -65,11 +65,11 @@ public class BaseRequestDTO implements Serializable {
     }
 
     public String getStatusSearch(String regex) {
-        if (Objects.nonNull(status) && !status.matches(regex)) {
-            return null;
+        if (Objects.nonNull(status) && status.matches(regex)) {
+            return status;
         }
 
-        return status;
+        return null;
     }
 
     public String getKeywordSearch() {
@@ -102,6 +102,14 @@ public class BaseRequestDTO implements Serializable {
 
     public void setSort(String sort) {
         this.sort = sort;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getFromDate() {

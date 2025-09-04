@@ -6,7 +6,6 @@ package com.dct.model.constants;
  */
 @SuppressWarnings("unused")
 public interface BaseRegexConstants {
-
     String USERNAME_PATTERN = "^[a-zA-Z0-9]{2,100}$"; // Includes only numbers and letters
 
     // The length is between 8 and 20 characters
@@ -18,4 +17,5 @@ public interface BaseRegexConstants {
 
     // Check +84 or 0, 10 digits
     String PHONE_PATTERN = "^(\\+84|0)\\d{9}$";
+    String USER_STATUS_PATTERN = "^(ACTIVE|INACTIVE|LOCKED|DELETED)$";
 }

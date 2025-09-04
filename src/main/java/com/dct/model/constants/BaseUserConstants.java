@@ -1,6 +1,7 @@
 package com.dct.model.constants;
 
 import com.dct.model.exception.BaseIllegalArgumentException;
+import org.springframework.util.StringUtils;
 
 @SuppressWarnings("unused")
 public interface BaseUserConstants {
@@ -18,6 +19,20 @@ public interface BaseUserConstants {
                 case ACTIVE -> "ACTIVE";
                 case LOCKED -> "LOCKED";
                 case DELETED -> "DELETED";
+                default -> throw new BaseIllegalArgumentException(ENTITY_NAME, "Unexpected user status: " + status);
+            };
+        }
+
+        static Byte fromString(String status) {
+            if (!StringUtils.hasText(status)) {
+                return null;
+            }
+
+            return switch (status) {
+                case "INACTIVE" -> INACTIVE;
+                case "ACTIVE" -> ACTIVE;
+                case "LOCKED" -> LOCKED;
+                case "DELETED" -> DELETED;
                 default -> throw new BaseIllegalArgumentException(ENTITY_NAME, "Unexpected user status: " + status);
             };
         }
