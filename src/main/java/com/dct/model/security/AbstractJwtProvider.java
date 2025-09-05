@@ -10,11 +10,11 @@ import com.dct.model.exception.BaseIllegalArgumentException;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SecurityException;
 import io.jsonwebtoken.security.SignatureException;
 
 import org.slf4j.Logger;
@@ -37,7 +37,6 @@ public abstract class AbstractJwtProvider {
     private static final String ENTITY_NAME = "com.dct.model.security.filter.AbstractJwtProvider";
     protected final SecretKey accessTokenSecretKey;
     protected final JwtParser accessTokenParser;
-    protected final long ACCESS_TOKEN_VALIDITY;
 
     public AbstractJwtProvider(SecurityProps securityProps) {
         if (Objects.isNull(securityProps) || Objects.isNull(securityProps.getJwt())) {
@@ -46,15 +45,14 @@ public abstract class AbstractJwtProvider {
 
         SecurityProps.JwtConfig jwtConfig = securityProps.getJwt();
         String base64AccessTokenSecretKey = jwtConfig.getAccessToken().getBase64SecretKey();
-        ACCESS_TOKEN_VALIDITY = jwtConfig.getAccessToken().getValidity();
 
         if (!StringUtils.hasText(base64AccessTokenSecretKey)) {
             throw new BaseIllegalArgumentException(ENTITY_NAME, "Could not found secret key to sign JWT");
         }
 
         log.debug("[JWT_SIGNATURE_AUTO_CONFIG] - Using a Base64-encoded JWT secret key");
-        byte[] KeyBytes = Base64.getUrlDecoder().decode(base64AccessTokenSecretKey);
-        accessTokenSecretKey = Keys.hmacShaKeyFor(KeyBytes);
+        byte[] keyBytes = Base64.getUrlDecoder().decode(base64AccessTokenSecretKey);
+        accessTokenSecretKey = Keys.hmacShaKeyFor(keyBytes);
         accessTokenParser = Jwts.parser().verifyWith(accessTokenSecretKey).build();
         log.debug("[JWT_SIGNATURE_AUTO_CONFIG] - Sign JWT with algorithm: {}", accessTokenSecretKey.getAlgorithm());
     }
@@ -71,15 +69,15 @@ public abstract class AbstractJwtProvider {
             throw new BaseBadRequestException(ENTITY_NAME, BaseExceptionConstants.BAD_CREDENTIALS);
 
         try {
-            return (Claims) parser.parse(token).getPayload();
+            return parser.parseSignedClaims(token).getPayload();
         } catch (MalformedJwtException e) {
             log.error("[JWT_MALFORMED_ERROR] - Invalid JWT: {}", e.getMessage());
         } catch (SignatureException e) {
             log.error("[JWT_SIGNATURE_ERROR] - Invalid JWT signature: {}", e.getMessage());
-        } catch (SecurityException e) {
-            log.error("[JWT_SECURITY_ERROR] - Unable to decode JWT: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
             log.error("[JWT_EXPIRED_ERROR] - Expired JWT: {}", e.getMessage());
+        } catch (JwtException e) {
+            log.error("[JWT_SECURITY_ERROR] - Unable to decode JWT: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
             log.error("[ILLEGAL_ARGUMENT_ERROR] - Invalid JWT string (null, empty,...): {}", e.getMessage());
         }
