@@ -4,7 +4,6 @@ import org.springframework.http.HttpMethod;
 
 @SuppressWarnings("unused")
 public interface BaseSecurityConstants {
-
     // The encryption complexity in PasswordEncoder's algorithm (between 4 and 31)
     // Higher values mean the password is harder to attack, but too high will reduce performance
     int DEFAULT_BCRYPT_COST_FACTOR = 12;
@@ -39,6 +38,13 @@ public interface BaseSecurityConstants {
         String USER_ID = "X-User-ID";
         String USER_NAME = "X-User-Name";
         String USER_AUTHORITIES = "X-User-Authorities";
+        String USER_AGENT = "User-Agent";
+        String X_FORWARDED_FOR = "X-Forwarded-For";
+        String X_REAL_IP = "X-Real-IP";
+        String X_CSRF_TOKEN = "X-CSRF-Token";
+        String X_REQUESTED_WITH = "X-Requested-With";
+        String X_APP_VERSION = "X-App-Version";
+        String X_DEVICE_ID = "X-Device-ID";
     }
 
     /**

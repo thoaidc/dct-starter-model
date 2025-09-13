@@ -14,11 +14,7 @@ import com.dct.model.dto.response.BaseResponseDTO;
  */
 @SuppressWarnings("unused")
 public interface BaseResultConstants {
-
     // Get data success
     String GET_DATA_SUCCESS = "result.data.success";
     String SUCCESS = "result.success";
-
-    // Get data failed
-    String DATA_NOT_FOUND = "result.failed.data.notFound";
 }

@@ -11,7 +11,6 @@ package com.dct.model.constants;
  */
 @SuppressWarnings("unused")
 public interface BaseExceptionConstants {
-
     // I18n exception
     String TRANSLATE_NOT_FOUND = "exception.i18n.notFound";
 
@@ -39,12 +38,10 @@ public interface BaseExceptionConstants {
     String UNAUTHORIZED = "exception.auth.unauthorized";
     String FORBIDDEN = "exception.auth.forbidden";
     String TOKEN_INVALID_OR_EXPIRED = "exception.auth.token.invalidOrExpired";
-    String OAUTH2_AUTHORIZATION_CODE_EXCEPTION = "";
     String DATASOURCE_CONFIG_NOT_NULL = "exception.datasource.notNull";
 
     // Validate account info exception
     String REGISTER_FAILED = "exception.account.register.failed";
-    String ACCOUNT_NOT_EXISTED = "exception.account.notExisted";
     String OLD_PASSWORD_INVALID = "exception.account.oldPasswordInvalid";
     String NEW_PASSWORD_DUPLICATED = "exception.account.newPasswordDuplicated";
 
@@ -58,7 +55,6 @@ public interface BaseExceptionConstants {
     String DATA_INVALID = "exception.data.invalid";
     String DATA_NOT_FOUND = "exception.data.notFound";
     String DATA_EXISTED = "exception.data.existed";
-    String DATA_NOT_EXISTED = "exception.data.notExisted";
     String ID_NOT_NULL = "exception.data.id.notNull";
     String ID_INVALID = "exception.data.id.invalid";
     String NAME_NOT_BLANK = "exception.data.name.notBlank";
@@ -93,4 +89,7 @@ public interface BaseExceptionConstants {
     String CONTENT_NOT_BLANK = "exception.data.content.notBlank";
     String CONTENT_MAX_LENGTH = "exception.data.content.maxLength";
     String DEVICE_ID_NOT_BLANK = "exception.data.deviceId.notBlank";
+
+    String FAILED = "result.failed";
+    String GET_DATA_FAILED = "result.data.failed";
 }
