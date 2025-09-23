@@ -2,7 +2,10 @@ package com.dct.model.constants;
 
 @SuppressWarnings("unused")
 public interface BaseDatetimeConstants {
-
+    long ONE_SECOND_IN_MILLIS = 1000L;
+    long ONE_MINUTE_IN_MILLIS = 60 * ONE_SECOND_IN_MILLIS;
+    long ONE_HOUR_IN_MILLIS = 60 * ONE_MINUTE_IN_MILLIS;
+    long ONE_DAY_IN_MILLIS = 24 * ONE_HOUR_IN_MILLIS;
     long ONE_SECOND = 1L;
     long ONE_MINUTE = 60 * ONE_SECOND;
     long ONE_HOUR = 60 * ONE_MINUTE;

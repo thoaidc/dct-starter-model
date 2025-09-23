@@ -27,6 +27,9 @@ public interface BaseSecurityConstants {
         // The key of the cookie storing the JWT token, which is HTTP-only
         // This cookie is automatically sent with requests by browser but cannot be accessed by JavaScript
         String HTTP_ONLY_TOKEN = "dct_refresh_token";
+        int COOKIE_EXPIRED = 0;
+        String SECURITY_ATTRIBUTE = "SameSite";
+        String SECURITY_MODE = "Strict";
     }
 
     interface HEADER {
