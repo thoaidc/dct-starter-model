@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +23,22 @@ import java.util.Objects;
  */
 @SuppressWarnings("unused")
 public class JsonUtils {
-
     private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
-
     // Configure ObjectMapper to serialize null fields and format JSON with pretty printing
     private static final ObjectMapper objectMapper = DataConverterAutoConfiguration.buildObjectMapper();
+
+    public static boolean isValidJson(String input) {
+        if (Objects.isNull(input) || input.isBlank()) {
+            return false;
+        }
+
+        try {
+            objectMapper.readTree(input);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
 
     /**
      * Read an object from json file
@@ -39,9 +51,9 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(new File(filePath), className);
         } catch (JsonProcessingException e) {
-            log.error("Invalid JSON format when read Object from file. {}", e.getMessage());
+            log.error("[INVALID_JSON_FORMAT] - When read Object from file: {}, {}", filePath, e.getMessage());
         } catch (IOException e) {
-            log.error("Cannot read Object data from file: {}. {}", filePath, e.getMessage());
+            log.error("[READ_JSON_ERROR] - Cannot read Object data from file: {}. {}", filePath, e.getMessage());
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -77,9 +89,9 @@ public class JsonUtils {
 
             return results;
         } catch (JsonProcessingException e) {
-            log.error("Invalid JSON format when read Array from file. {}", e.getMessage());
+            log.error("[INVALID_JSON_FORMAT] - When read Array from file: {}, {}", filePath, e.getMessage());
         } catch (IOException e) {
-            log.error("Cannot read Array from file: {}. {}", filePath, e.getMessage());
+            log.error("[READ_JSON_ERROR] - Cannot read Array from file: {}. {}", filePath, e.getMessage());
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -96,7 +108,7 @@ public class JsonUtils {
         try {
             objectMapper.writeValue(new File(filePath), jsonObject);
         } catch (IOException e) {
-            log.error("Cannot write JSON object to file: {}", filePath, e);
+            log.error("[WRITE_JSON_ERROR] - Cannot write JSON object to file: {}", filePath, e);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -115,11 +127,32 @@ public class JsonUtils {
             try {
                 return objectMapper.readValue(jsonString, className);
             } catch (JsonProcessingException e) {
-                log.error("Invalid JSON format when parse from string. {}", e.getMessage());
+                log.error("[INVALID_JSON_FORMAT] - When parse from string: {}, {}", jsonString, e.getMessage());
             }
         }
 
         return null;
+    }
+
+    /**
+     * Parse JSON content into a specific class type
+     *
+     * @param jsonString  JSON string to parse
+     * @param className Class to parse into
+     * @param <T>         Type of the desired object
+     * @return A list parsed object of type T or empty list on error
+     */
+    public static <T> List<T> parseJsonToList(String jsonString, Class<T> className) {
+        if (StringUtils.hasText(jsonString)) {
+            try {
+                CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, className);
+                return objectMapper.readValue(jsonString, listType);
+            } catch (JsonProcessingException e) {
+                log.error("[INVALID_JSON_FORMAT] - When parse list from string: {}, {}", jsonString, e.getMessage());
+            }
+        }
+
+        return new ArrayList<>();
     }
 
     /**
@@ -131,7 +164,7 @@ public class JsonUtils {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            log.error("Cannot convert object to JSON string. {}", e.getMessage());
+            log.error("[WRITE_JSON_ERROR] - Cannot convert object to JSON string: {}", e.getMessage());
         }
 
         return "";
