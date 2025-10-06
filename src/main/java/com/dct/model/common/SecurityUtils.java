@@ -7,6 +7,8 @@ import com.dct.model.dto.response.BaseResponseDTO;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +26,7 @@ import java.util.stream.Stream;
 
 @SuppressWarnings("unused")
 public class SecurityUtils {
+    private static final Logger log = LoggerFactory.getLogger(SecurityUtils.class);
 
     public static MvcRequestMatcher[] convertToMvcMatchers(MvcRequestMatcher.Builder mvc, String[] patterns) {
         return Stream.of(patterns)
@@ -69,27 +72,30 @@ public class SecurityUtils {
     }
 
     public static String retrieveTokenWebFlux(ServerHttpRequest request) {
-        // Extract from Authorization header
-        String authHeader = request.getHeaders().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_HEADER);
+        try {
+            // Extract from Authorization header
+            String authHeader = request.getHeaders().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_HEADER);
 
-        if (StringUtils.hasText(authHeader) && authHeader.startsWith(BaseSecurityConstants.HEADER.TOKEN_TYPE)) {
-            return authHeader.substring(BaseSecurityConstants.HEADER.TOKEN_TYPE.length());
+            if (StringUtils.hasText(authHeader) && authHeader.startsWith(BaseSecurityConstants.HEADER.TOKEN_TYPE)) {
+                return authHeader.substring(BaseSecurityConstants.HEADER.TOKEN_TYPE.length());
+            }
+
+            // Extract from query parameter (for WebSocket)
+            return request.getQueryParams().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_WEBSOCKET);
+        } catch (Exception e) {
+            log.error("[RETRIEVE_TOKEN_ERROR] - error", e);
+            return null;
         }
-
-        // Extract from query parameter (for WebSocket)
-        return request.getQueryParams().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_WEBSOCKET);
     }
 
     public static String convertUnAuthorizeError(ServerHttpResponse response, String message) {
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-
         BaseResponseDTO responseDTO = BaseResponseDTO.builder()
                 .code(BaseHttpStatusConstants.UNAUTHORIZED)
                 .success(Boolean.FALSE)
                 .message(message)
                 .build();
-
         return JsonUtils.toJsonString(responseDTO);
     }
 }
