@@ -17,7 +17,6 @@ import java.util.Locale;
  */
 @SuppressWarnings("unused")
 public class MessageTranslationUtils {
-
     private static final Logger log = LoggerFactory.getLogger(MessageTranslationUtils.class);
     private final MessageSource messageSource; // Spring boot service for I18n
 
@@ -32,9 +31,13 @@ public class MessageTranslationUtils {
      * @return Value of {@link BaseExceptionConstants#TRANSLATE_NOT_FOUND} if not found message I18n
      */
     public String getMessageI18n(String messageKey, Object ...args) {
-        log.debug("Translate message for key: '{}'", messageKey);
         // The value of Locale represents the current region, here used to determine the language type to translate
         Locale locale = LocaleContextHolder.getLocale();
+        return getMessageI18n(locale, messageKey, args);
+    }
+
+    public String getMessageI18n(Locale locale, String messageKey, Object ...args) {
+        log.debug("[TRANSLATE_MESSAGE] - message key: '{}'", messageKey);
         String message = messageSource.getMessage(messageKey, args, null, locale);
 
         if (StringUtils.hasText(message))
@@ -50,9 +53,7 @@ public class MessageTranslationUtils {
      * @return null if not found message
      */
     public String checkMessageI18n(String messageKey, Object ...args) {
-        // The value of Locale represents the current region, here used to determine the language type to translate
-        Locale locale = LocaleContextHolder.getLocale();
-        String message = messageSource.getMessage(messageKey, args, null, locale);
+        String message = getMessageI18n(messageKey, args);
 
         if (StringUtils.hasText(message))
             return message;
