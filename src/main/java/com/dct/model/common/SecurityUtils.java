@@ -22,6 +22,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 
 @SuppressWarnings("unused")
@@ -41,8 +42,23 @@ public class SecurityUtils {
     }
 
     public static boolean checkIfAuthenticationNotRequired(String requestUri, String[] publicPatterns) {
+        return checkPathMatches(requestUri, publicPatterns);
+    }
+
+    public static boolean checkIfAuthenticationNotRequired(String requestUri, Set<String> publicPatterns) {
+        return checkPathMatches(requestUri, publicPatterns);
+    }
+
+    public static boolean checkPathMatches(String requestUri, String[] publicPatterns) {
         PathPatternParser parser = new PathPatternParser();
         return Arrays.stream(publicPatterns)
+                .map(parser::parse)
+                .anyMatch(p -> p.matches(PathContainer.parsePath(requestUri)));
+    }
+
+    public static boolean checkPathMatches(String requestUri, Set<String> publicPatterns) {
+        PathPatternParser parser = new PathPatternParser();
+        return publicPatterns.stream()
                 .map(parser::parse)
                 .anyMatch(p -> p.matches(PathContainer.parsePath(requestUri)));
     }

@@ -32,6 +32,7 @@ public class SecurityProps {
     private AuthenticationType authenticationType = AuthenticationType.CUSTOM;
     private Integer passwordEncryptFactor = BaseSecurityConstants.DEFAULT_BCRYPT_COST_FACTOR;
     private String[] publicRequestPatterns = BaseSecurityConstants.REQUEST_MATCHERS.DEFAULT_PUBLIC_API_PATTERNS;
+    private String[] rateLimitExcludedApis;
     private JwtConfig jwt = new JwtConfig();
     private OAuth2Config oauth2 = new OAuth2Config();
 
@@ -57,6 +58,14 @@ public class SecurityProps {
 
     public void setPublicRequestPatterns(String[] publicRequestPatterns) {
         this.publicRequestPatterns = publicRequestPatterns;
+    }
+
+    public String[] getRateLimitExcludedApis() {
+        return rateLimitExcludedApis;
+    }
+
+    public void setRateLimitExcludedApis(String[] rateLimitExcludedApis) {
+        this.rateLimitExcludedApis = rateLimitExcludedApis;
     }
 
     public AuthenticationType getAuthenticationType() {

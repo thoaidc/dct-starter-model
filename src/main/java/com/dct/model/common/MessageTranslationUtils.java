@@ -74,8 +74,6 @@ public class MessageTranslationUtils {
 
             if (StringUtils.hasText(messageTranslated))
                 responseDTO.setMessage(messageTranslated);
-        } else {
-            responseDTO.setMessage(getMessageI18n(BaseExceptionConstants.TRANSLATE_NOT_FOUND));
         }
 
         return responseDTO;

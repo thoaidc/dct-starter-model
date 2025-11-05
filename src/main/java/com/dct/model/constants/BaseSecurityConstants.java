@@ -97,6 +97,8 @@ public interface BaseSecurityConstants {
         long DEFAULT_MAX_AGE = 3600;
     }
 
+    String PUBLIC_REQUEST_CONFIG = "gateway_public_request_config";
+
     interface Role {
         String DEFAULT = "ROLE_DEFAULT";
         String SUPER_ADMIN = "ROLE_ADMIN";
