@@ -19,6 +19,7 @@ public interface BaseSecurityConstants {
      */
     interface TOKEN_PAYLOAD {
         String USER_ID = "userId";
+        String SHOP_ID = "shopId";
         String USERNAME = "username";
         String AUTHORITIES = "authorities";
     }

@@ -97,7 +97,6 @@ public abstract class AbstractJwtProvider {
             BaseUserDTO principal = BaseUserDTO.userBuilder()
                     .withId(userId)
                     .withUsername(username)
-                    .withPassword(username) // Not used but needed to avoid `null` error in User of spring security
                     .withAuthorities(userAuthorities)
                     .build();
             return new UsernamePasswordAuthenticationToken(principal, username, userAuthorities);

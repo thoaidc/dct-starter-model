@@ -46,11 +46,20 @@ public class CorsProps {
     }
 
     public static class CorsMapping {
+        private List<String> allowedOriginPatterns;
         private List<String> allowedOrigins = List.of(BaseSecurityConstants.CORS.DEFAULT_ALLOWED_ORIGIN_PATTERNS);
         private List<String> allowedMethods = List.of(BaseSecurityConstants.CORS.DEFAULT_ALLOWED_REQUEST_METHODS);
         private List<String> allowedHeaders = List.of(BaseSecurityConstants.CORS.DEFAULT_ALLOWED_HEADERS);
         private boolean allowCredentials = BaseSecurityConstants.CORS.DEFAULT_ALLOW_CREDENTIALS;
         private long maxAge = BaseSecurityConstants.CORS.DEFAULT_MAX_AGE;
+
+        public List<String> getAllowedOriginPatterns() {
+            return allowedOriginPatterns;
+        }
+
+        public void setAllowedOriginPatterns(List<String> allowedOriginPatterns) {
+            this.allowedOriginPatterns = allowedOriginPatterns;
+        }
 
         public List<String> getAllowedOrigins() {
             return allowedOrigins;
@@ -76,19 +85,19 @@ public class CorsProps {
             this.allowedHeaders = allowedHeaders;
         }
 
-        public Boolean getAllowCredentials() {
+        public boolean getAllowCredentials() {
             return allowCredentials;
         }
 
-        public void setAllowCredentials(Boolean allowCredentials) {
+        public void setAllowCredentials(boolean allowCredentials) {
             this.allowCredentials = allowCredentials;
         }
 
-        public Long getMaxAge() {
+        public long getMaxAge() {
             return maxAge;
         }
 
-        public void setMaxAge(Long maxAge) {
+        public void setMaxAge(long maxAge) {
             this.maxAge = maxAge;
         }
     }
