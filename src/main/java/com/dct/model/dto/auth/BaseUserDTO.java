@@ -67,6 +67,7 @@ public class BaseUserDTO extends User {
             BaseUserDTO userDTO = new BaseUserDTO(this.username, this.username, authorities);
             userDTO.setId(this.id);
             userDTO.setShopId(this.shopId);
+            userDTO.setUsername(this.username);
             userDTO.setUserAuthorities(this.userAuthorities);
             return userDTO;
         }
