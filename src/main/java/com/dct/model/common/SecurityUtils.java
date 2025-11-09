@@ -41,6 +41,11 @@ public class SecurityUtils {
         return Arrays.stream(publicPatterns).noneMatch(pattern -> antPathMatcher.match(pattern, requestUri));
     }
 
+    public static boolean checkIfAuthenticationRequired(String requestUri, Set<String> publicPatterns) {
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+        return publicPatterns.stream().noneMatch(pattern -> antPathMatcher.match(pattern, requestUri));
+    }
+
     public static boolean checkIfAuthenticationNotRequired(String requestUri, String[] publicPatterns) {
         return checkPathMatches(requestUri, publicPatterns);
     }
