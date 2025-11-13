@@ -33,32 +33,30 @@ public class MessageTranslationUtils {
     public String getMessageI18n(String messageKey, Object ...args) {
         // The value of Locale represents the current region, here used to determine the language type to translate
         Locale locale = LocaleContextHolder.getLocale();
-        return getMessageI18n(locale, messageKey, args);
+        return getMessageI18n(locale, messageKey, BaseExceptionConstants.TRANSLATE_NOT_FOUND, args);
     }
 
-    public String getMessageI18n(Locale locale, String messageKey, Object ...args) {
+    /**
+     * Get the internationalized content (I18n) of the key based on the current locale in the application
+     * @param messageKey The code corresponding to the internationalized content to be retrieved
+     * @param defaultMessage Default message to fallback when not found key i18n
+     * @param args Arguments passed to use dynamic values for message
+     * @return Value of defaultMessage if not found message I18n
+     */
+    public String getMessageI18n(String messageKey, String defaultMessage, Object ...args) {
+        // The value of Locale represents the current region, here used to determine the language type to translate
+        Locale locale = LocaleContextHolder.getLocale();
+        return getMessageI18n(locale, messageKey, defaultMessage, args);
+    }
+
+    public String getMessageI18n(Locale locale, String messageKey, String defaultMessage, Object ...args) {
         log.debug("[TRANSLATE_MESSAGE] - message key: '{}'", messageKey);
         String message = messageSource.getMessage(messageKey, args, null, locale);
 
         if (StringUtils.hasText(message))
             return message;
 
-        return messageSource.getMessage(BaseExceptionConstants.TRANSLATE_NOT_FOUND, null, "", locale);
-    }
-
-    /**
-     * Check if message found in i18n message file then return, otherwise return null
-     * @param messageKey The code corresponding to the internationalized content to be retrieved
-     * @param args Arguments passed to use dynamic values for message
-     * @return null if not found message
-     */
-    public String checkMessageI18n(String messageKey, Object ...args) {
-        String message = getMessageI18n(messageKey, args);
-
-        if (StringUtils.hasText(message))
-            return message;
-
-        return null;
+        return messageSource.getMessage(defaultMessage, args, defaultMessage, locale);
     }
 
     /**
@@ -70,10 +68,8 @@ public class MessageTranslationUtils {
         String messageKey = responseDTO.getMessage();
 
         if (StringUtils.hasText(messageKey)) {
-            String messageTranslated = checkMessageI18n(messageKey);
-
-            if (StringUtils.hasText(messageTranslated))
-                responseDTO.setMessage(messageTranslated);
+            String messageTranslated = getMessageI18n(messageKey, responseDTO.getMessage());
+            responseDTO.setMessage(messageTranslated);
         }
 
         return responseDTO;
