@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -62,6 +63,14 @@ public class BaseRequestDTO implements Serializable {
 
     public String getToDateSearch() {
         return BaseCommon.convertDateTimeSearch(toDate);
+    }
+
+    public Instant getFromInstantSearch() {
+        return BaseCommon.convertInstantSearch(fromDate);
+    }
+
+    public Instant getToInstantSearch() {
+        return BaseCommon.convertInstantSearch(toDate);
     }
 
     public String getStatusSearch(String regex) {

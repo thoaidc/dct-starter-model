@@ -10,8 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Field;
 import java.text.Normalizer;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -59,6 +61,29 @@ public class BaseCommon {
             return formatterTarget.withZone(zoneId).format(localDateTime);
         } catch (DateTimeParseException e) {
             log.error("[ERROR_CONVERT_FROM_DATE_REQUEST] - datetime = {} from request: {}", datetime, e.getMessage());
+            return null;
+        }
+    }
+
+    public static Instant convertInstantSearch(String datetime) {
+        if (!StringUtils.hasText(datetime)) {
+            return null;
+        }
+
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("yyyy")
+                .optionalStart().appendPattern("-MM").optionalEnd()
+                .optionalStart().appendPattern("/MM").optionalEnd()
+                .optionalStart().appendPattern("-dd").optionalEnd()
+                .optionalStart().appendPattern("/dd").optionalEnd()
+                .optionalStart().appendLiteral(' ').appendPattern("HH:mm").optionalEnd()
+                .optionalStart().appendPattern(":ss").optionalEnd()
+                .toFormatter();
+        try {
+            DateTimeFormatter formatterTarget = DateTimeFormatter.ofPattern(BaseDatetimeConstants.Formatter.DEFAULT);
+            return formatterTarget.withZone(ZoneOffset.UTC).parse(datetime, Instant::from);
+        } catch (DateTimeParseException e) {
+            log.error("[ERROR_CONVERT_INSTANT_FROM_DATE_REQUEST] - datetime = {} from request: {}", datetime, e.getMessage());
             return null;
         }
     }
