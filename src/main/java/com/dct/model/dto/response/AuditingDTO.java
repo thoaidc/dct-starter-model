@@ -29,6 +29,22 @@ public class AuditingDTO implements Serializable {
     )
     private Instant lastModifiedDate;
 
+    public AuditingDTO() {}
+
+    public AuditingDTO(Integer id, String createdBy, Instant createdDate) {
+        this.id = id;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+    }
+
+    public AuditingDTO(Integer id, String createdBy, String lastModifiedBy, Instant createdDate, Instant lastModifiedDate) {
+        this.id = id;
+        this.createdBy = createdBy;
+        this.lastModifiedBy = lastModifiedBy;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
     public Integer getId() {
         return id;
     }
