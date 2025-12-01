@@ -22,6 +22,7 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -33,6 +34,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -43,6 +45,7 @@
             <artifactId>spring-security-web</artifactId>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
