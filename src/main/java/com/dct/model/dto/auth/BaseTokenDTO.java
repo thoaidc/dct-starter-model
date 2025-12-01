@@ -1,5 +1,7 @@
 package com.dct.model.dto.auth;
 
+import com.dct.model.annotation.JwtIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,40 +13,54 @@ import java.util.Set;
  */
 @SuppressWarnings("unused")
 public class BaseTokenDTO {
+    @JwtIgnore
     private Integer userId;
+    @JwtIgnore
     private String username;
-    private Boolean isRememberMe = false;
-    private Set<String> authorities = new HashSet<>();
+    @JwtIgnore
+    private Boolean isRememberMe;
+    @JwtIgnore
+    private Set<String> authorities;
+
+    public BaseTokenDTO(Integer userId, String username, Boolean isRememberMe, Set<String> authorities) {
+        this.userId = userId;
+        this.username = username;
+        this.isRememberMe = isRememberMe;
+        this.authorities = authorities;
+    }
 
     public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
-        private final BaseTokenDTO instance = new BaseTokenDTO();
+        private Integer userId;
+        private String username;
+        private Boolean isRememberMe = false;
+        private Set<String> authorities = new HashSet<>();
 
         public Builder username(String username) {
-            instance.username = username;
+            this.username = username;
             return this;
         }
 
         public Builder userId(Integer userId) {
-            instance.userId = userId;
+            this.userId = userId;
             return this;
         }
 
         public Builder authorities(Set<String> authorities) {
-            instance.authorities = authorities;
+            this.authorities = authorities;
             return this;
         }
 
         public Builder rememberMe(boolean rememberMe) {
-            instance.isRememberMe = rememberMe;
+            this.isRememberMe = rememberMe;
             return this;
         }
 
         public BaseTokenDTO build() {
-            return instance;
+            return new BaseTokenDTO(userId, username, isRememberMe, authorities);
         }
     }
 
