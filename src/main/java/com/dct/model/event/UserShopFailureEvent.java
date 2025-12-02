@@ -3,11 +3,11 @@ package com.dct.model.event;
 @SuppressWarnings("unused")
 public class UserShopFailureEvent {
     private String sagaId;
-    private String userId;
+    private Integer userId;
     private String errorMessage;
     private String errorCode;
 
-    public UserShopFailureEvent(String sagaId, String userId, String errorMessage, String errorCode) {
+    public UserShopFailureEvent(String sagaId, Integer userId, String errorMessage, String errorCode) {
         this.sagaId = sagaId;
         this.userId = userId;
         this.errorMessage = errorMessage;
@@ -20,7 +20,7 @@ public class UserShopFailureEvent {
 
     public static class Builder {
         private String sagaId;
-        private String userId;
+        private Integer userId;
         private String errorMessage;
         private String errorCode;
 
@@ -29,7 +29,7 @@ public class UserShopFailureEvent {
             return this;
         }
 
-        public Builder userId(String userId) {
+        public Builder userId(Integer userId) {
             this.userId = userId;
             return this;
         }
@@ -57,11 +57,11 @@ public class UserShopFailureEvent {
         this.sagaId = sagaId;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -79,5 +79,10 @@ public class UserShopFailureEvent {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("sagaId: %s, userId: %s, errorCode: %s, message: %s", sagaId, userId, errorCode, errorMessage);
     }
 }

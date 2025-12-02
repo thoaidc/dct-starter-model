@@ -3,26 +3,23 @@ package com.dct.model.event;
 @SuppressWarnings("unused")
 public class UserCreatedEvent {
     private String sagaId;
-    private String userId;
+    private Integer userId;
     private String email;
     private String phone;
     private String shopName;
-    private String shopDescription;
 
     public UserCreatedEvent(
         String sagaId,
-        String userId,
+        Integer userId,
         String email,
         String phone,
-        String shopName,
-        String shopDescription
+        String shopName
     ) {
         this.sagaId = sagaId;
         this.userId = userId;
         this.email = email;
         this.phone = phone;
         this.shopName = shopName;
-        this.shopDescription = shopDescription;
     }
 
     public static Builder builder() {
@@ -31,18 +28,17 @@ public class UserCreatedEvent {
 
     public static class Builder {
         private String sagaId;
-        private String userId;
+        private Integer userId;
         private String email;
         private String phone;
         private String shopName;
-        private String shopDescription;
 
         public Builder sagaId(String sagaId) {
             this.sagaId = sagaId;
             return this;
         }
 
-        public Builder userId(String userId) {
+        public Builder userId(Integer userId) {
             this.userId = userId;
             return this;
         }
@@ -62,13 +58,8 @@ public class UserCreatedEvent {
             return this;
         }
 
-        public Builder shopDescription(String shopDescription) {
-            this.shopDescription = shopDescription;
-            return this;
-        }
-
         public UserCreatedEvent build() {
-            return new UserCreatedEvent(sagaId, userId, email, phone, shopName, shopDescription);
+            return new UserCreatedEvent(sagaId, userId, email, phone, shopName);
         }
     }
 
@@ -80,11 +71,11 @@ public class UserCreatedEvent {
         this.sagaId = sagaId;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -112,11 +103,8 @@ public class UserCreatedEvent {
         this.shopName = shopName;
     }
 
-    public String getShopDescription() {
-        return shopDescription;
-    }
-
-    public void setShopDescription(String shopDescription) {
-        this.shopDescription = shopDescription;
+    @Override
+    public String toString() {
+        return String.format("sagaId: %s, userId: %s, shopName: %s", sagaId, userId, shopName);
     }
 }
