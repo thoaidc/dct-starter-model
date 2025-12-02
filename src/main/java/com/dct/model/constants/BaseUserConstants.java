@@ -8,6 +8,7 @@ public interface BaseUserConstants {
     String ENTITY_NAME = "com.dct.model.constants.BaseUserConstants";
 
     interface Status {
+        byte PENDING = -1;
         byte INACTIVE = 0;
         byte ACTIVE = 1;
         byte LOCKED = 2;
@@ -15,6 +16,7 @@ public interface BaseUserConstants {
 
         static String toString(byte status) {
             return switch (status) {
+                case PENDING -> "PENDING";
                 case INACTIVE -> "INACTIVE";
                 case ACTIVE -> "ACTIVE";
                 case LOCKED -> "LOCKED";
@@ -29,6 +31,7 @@ public interface BaseUserConstants {
             }
 
             return switch (status) {
+                case "PENDING" -> PENDING;
                 case "INACTIVE" -> INACTIVE;
                 case "ACTIVE" -> ACTIVE;
                 case "LOCKED" -> LOCKED;
