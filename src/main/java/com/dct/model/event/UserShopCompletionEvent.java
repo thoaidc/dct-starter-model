@@ -7,6 +7,8 @@ public class UserShopCompletionEvent {
     private Integer shopId;
     private String shopName;
 
+    public UserShopCompletionEvent() {}
+
     public UserShopCompletionEvent(String sagaId, Integer userId, Integer shopId, String shopName) {
         this.sagaId = sagaId;
         this.userId = userId;

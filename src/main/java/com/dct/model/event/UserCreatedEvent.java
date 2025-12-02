@@ -8,6 +8,8 @@ public class UserCreatedEvent {
     private String phone;
     private String shopName;
 
+    public UserCreatedEvent() {}
+
     public UserCreatedEvent(
         String sagaId,
         Integer userId,

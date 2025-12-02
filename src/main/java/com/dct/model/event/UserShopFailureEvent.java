@@ -7,6 +7,8 @@ public class UserShopFailureEvent {
     private String errorMessage;
     private String errorCode;
 
+    public UserShopFailureEvent() {}
+
     public UserShopFailureEvent(String sagaId, Integer userId, String errorMessage, String errorCode) {
         this.sagaId = sagaId;
         this.userId = userId;
