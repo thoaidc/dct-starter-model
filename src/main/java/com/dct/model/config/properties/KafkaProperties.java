@@ -17,32 +17,59 @@ public class KafkaProperties {
     }
 
     public static class Topic {
-        private String createUserShopCompletion;
-        private String createUserShopFailure;
-        private String registerShop;
+        private String userCreated;
+        private String userRegisterShopCompletion;
+        private String userRegisterShopFailure;
+        private String orderCreated;
+        private String orderPaymentSuccessful;
+        private String orderPaymentFailure;
 
-        public String getCreateUserShopCompletion() {
-            return createUserShopCompletion;
+        public String getUserCreated() {
+            return userCreated;
         }
 
-        public void setCreateUserShopCompletion(String createUserShopCompletion) {
-            this.createUserShopCompletion = createUserShopCompletion;
+        public void setUserCreated(String userCreated) {
+            this.userCreated = userCreated;
         }
 
-        public String getCreateUserShopFailure() {
-            return createUserShopFailure;
+        public String getUserRegisterShopCompletion() {
+            return userRegisterShopCompletion;
         }
 
-        public void setCreateUserShopFailure(String createUserShopFailure) {
-            this.createUserShopFailure = createUserShopFailure;
+        public void setUserRegisterShopCompletion(String userRegisterShopCompletion) {
+            this.userRegisterShopCompletion = userRegisterShopCompletion;
         }
 
-        public String getRegisterShop() {
-            return registerShop;
+        public String getUserRegisterShopFailure() {
+            return userRegisterShopFailure;
         }
 
-        public void setRegisterShop(String registerShop) {
-            this.registerShop = registerShop;
+        public void setUserRegisterShopFailure(String userRegisterShopFailure) {
+            this.userRegisterShopFailure = userRegisterShopFailure;
+        }
+
+        public String getOrderCreated() {
+            return orderCreated;
+        }
+
+        public void setOrderCreated(String orderCreated) {
+            this.orderCreated = orderCreated;
+        }
+
+        public String getOrderPaymentSuccessful() {
+            return orderPaymentSuccessful;
+        }
+
+        public void setOrderPaymentSuccessful(String orderPaymentSuccessful) {
+            this.orderPaymentSuccessful = orderPaymentSuccessful;
+        }
+
+        public String getOrderPaymentFailure() {
+            return orderPaymentFailure;
+        }
+
+        public void setOrderPaymentFailure(String orderPaymentFailure) {
+            this.orderPaymentFailure = orderPaymentFailure;
         }
     }
 }
