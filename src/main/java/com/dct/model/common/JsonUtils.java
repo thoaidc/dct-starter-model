@@ -155,6 +155,18 @@ public class JsonUtils {
         return new ArrayList<>();
     }
 
+    public static <T> T convertValue(String jsonString, Class<T> className) {
+        if (StringUtils.hasText(jsonString)) {
+            try {
+                return objectMapper.convertValue(jsonString, className);
+            } catch (Exception e) {
+                log.error("[CONVERT_JSON_ERROR] - {}", e.getMessage());
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Convert object to json String
      * @param object data to convert
