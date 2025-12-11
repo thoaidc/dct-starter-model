@@ -167,6 +167,16 @@ public class JsonUtils {
         return null;
     }
 
+    public static <T> T convertValue(Object object, Class<T> className) {
+        try {
+            return objectMapper.convertValue(object, className);
+        } catch (Exception e) {
+            log.error("[CONVERT_OBJECT_JSON_ERROR] - {}", e.getMessage());
+        }
+
+        return null;
+    }
+
     /**
      * Convert object to json String
      * @param object data to convert
