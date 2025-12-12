@@ -2,24 +2,14 @@ package com.dct.model.event;
 
 @SuppressWarnings("unused")
 public class PaymentSuccessEvent {
-    private String sagaId;
     private Integer userId;
     private Integer orderId;
 
     public PaymentSuccessEvent() {}
 
-    public PaymentSuccessEvent(String sagaId, Integer userId, Integer orderId) {
-        this.sagaId = sagaId;
+    public PaymentSuccessEvent(Integer userId, Integer orderId) {
         this.userId = userId;
         this.orderId = orderId;
-    }
-
-    public String getSagaId() {
-        return sagaId;
-    }
-
-    public void setSagaId(String sagaId) {
-        this.sagaId = sagaId;
     }
 
     public Integer getUserId() {

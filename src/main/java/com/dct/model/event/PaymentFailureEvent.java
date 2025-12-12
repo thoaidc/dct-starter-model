@@ -2,7 +2,6 @@ package com.dct.model.event;
 
 @SuppressWarnings("unused")
 public class PaymentFailureEvent {
-    private String sagaId;
     private Integer userId;
     private Integer orderId;
     private String errorMessage;
@@ -10,20 +9,11 @@ public class PaymentFailureEvent {
 
     public PaymentFailureEvent() {}
 
-    public PaymentFailureEvent(String sagaId, Integer userId, Integer orderId, String errorMessage, String errorCode) {
-        this.sagaId = sagaId;
+    public PaymentFailureEvent(Integer userId, Integer orderId, String errorMessage, String errorCode) {
         this.userId = userId;
         this.orderId = orderId;
         this.errorMessage = errorMessage;
         this.errorCode = errorCode;
-    }
-
-    public String getSagaId() {
-        return sagaId;
-    }
-
-    public void setSagaId(String sagaId) {
-        this.sagaId = sagaId;
     }
 
     public Integer getUserId() {

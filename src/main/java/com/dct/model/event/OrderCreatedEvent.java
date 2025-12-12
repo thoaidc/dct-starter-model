@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 @SuppressWarnings("unused")
 public class OrderCreatedEvent {
-    private String sagaId;
     private Integer userId;
     private Integer orderId;
     private String paymentMethod;
@@ -13,25 +12,15 @@ public class OrderCreatedEvent {
     public OrderCreatedEvent() {}
 
     public OrderCreatedEvent(
-        String sagaId,
         Integer userId,
         Integer orderId,
         String paymentMethod,
         BigDecimal amount
     ) {
-        this.sagaId = sagaId;
         this.userId = userId;
         this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.amount = amount;
-    }
-
-    public String getSagaId() {
-        return sagaId;
-    }
-
-    public void setSagaId(String sagaId) {
-        this.sagaId = sagaId;
     }
 
     public Integer getUserId() {
