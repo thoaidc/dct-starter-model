@@ -34,7 +34,7 @@ public interface BasePropertiesConstants {
     String RABBIT_MQ_CONFIG = "app.rabbitmq";
     String ENABLED_RABBIT_MQ = "app.rabbitmq.activate";
 
-    String KAFkA_CONFIG = "spring.kafka";
+    String KAFKA_CONFIG = "spring.kafka";
 
     String RATE_LIMIT_CONFIG = "app.rate-limiter";
     String ENABLED_RATE_LIMIT = "app.rate-limiter.activate";

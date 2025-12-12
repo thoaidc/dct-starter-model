@@ -4,7 +4,7 @@ import com.dct.model.constants.BasePropertiesConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @SuppressWarnings({"ConfigurationProperties", "unused"})
-@ConfigurationProperties(prefix = BasePropertiesConstants.KAFkA_CONFIG)
+@ConfigurationProperties(prefix = BasePropertiesConstants.KAFKA_CONFIG)
 public class KafkaProperties {
     private Topic topics;
 
