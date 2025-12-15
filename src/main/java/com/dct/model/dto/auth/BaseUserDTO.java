@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class BaseUserDTO extends User {
     private Integer id;
     private Integer shopId;
+    private String shopName;
     private String username;
     private Set<String> userAuthorities = new HashSet<>();
 
@@ -32,6 +34,7 @@ public class BaseUserDTO extends User {
     public static class Builder {
         private Integer id;
         private Integer shopId;
+        private String shopName;
         private String username;
         private Set<String> userAuthorities = new HashSet<>();
 
@@ -42,6 +45,11 @@ public class BaseUserDTO extends User {
 
         public Builder withShopId(Integer shopId) {
             this.shopId = shopId;
+            return this;
+        }
+
+        public Builder withShopName(String shopName) {
+            this.shopName = shopName;
             return this;
         }
 
@@ -67,6 +75,7 @@ public class BaseUserDTO extends User {
             BaseUserDTO userDTO = new BaseUserDTO(this.username, this.username, authorities);
             userDTO.setId(this.id);
             userDTO.setShopId(this.shopId);
+            userDTO.setShopName(this.shopName);
             userDTO.setUsername(this.username);
             userDTO.setUserAuthorities(this.userAuthorities);
             return userDTO;
@@ -98,11 +107,27 @@ public class BaseUserDTO extends User {
         this.username = username;
     }
 
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
     public Set<String> getUserAuthorities() {
         return userAuthorities;
     }
 
     public void setUserAuthorities(Set<String> userAuthorities) {
         this.userAuthorities = userAuthorities;
+    }
+
+    public boolean hasAuthority(String authority) {
+        return Optional.ofNullable(userAuthorities).orElseGet(HashSet::new).contains(authority);
+    }
+
+    public boolean hasAuthorities(Collection<String> authorities) {
+        return Optional.ofNullable(userAuthorities).orElseGet(HashSet::new).containsAll(authorities);
     }
 }

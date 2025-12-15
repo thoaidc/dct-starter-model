@@ -9,6 +9,8 @@ package com.dct.model.constants;
  */
 @SuppressWarnings("unused")
 public interface BaseRoleConstants {
+    String ADMIN = "00";
+
     interface System {
         String SYSTEM = "01";
         String UPDATE = "0102";
