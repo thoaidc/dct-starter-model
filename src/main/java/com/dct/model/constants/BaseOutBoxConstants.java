@@ -9,6 +9,7 @@ public interface BaseOutBoxConstants {
         String ORDER_CREATED = "ORDER_CREATED";
         String ORDER_PAYMENT_FAILURE = "ORDER_PAYMENT_FAILURE";
         String ORDER_PAYMENT_SUCCESSFUL = "ORDER_PAYMENT_SUCCESSFUL";
+        String CHANGE_BALANCE_AMOUNT = "CHANGE_BALANCE_AMOUNT";
     }
 
     interface Status {

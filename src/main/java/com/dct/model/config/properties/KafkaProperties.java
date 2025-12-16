@@ -23,6 +23,7 @@ public class KafkaProperties {
         private String orderCreated;
         private String orderPaymentSuccessful;
         private String orderPaymentFailure;
+        private String changeBalanceAmount;
 
         public String getUserCreated() {
             return userCreated;
@@ -70,6 +71,14 @@ public class KafkaProperties {
 
         public void setOrderPaymentFailure(String orderPaymentFailure) {
             this.orderPaymentFailure = orderPaymentFailure;
+        }
+
+        public String getChangeBalanceAmount() {
+            return changeBalanceAmount;
+        }
+
+        public void setChangeBalanceAmount(String changeBalanceAmount) {
+            this.changeBalanceAmount = changeBalanceAmount;
         }
     }
 }
