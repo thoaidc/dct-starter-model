@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -94,6 +95,12 @@ public class SecurityUtils {
 
     public static String retrieveTokenWebFlux(ServerHttpRequest request) {
         try {
+            HttpCookie cookie = request.getCookies().getFirst(BaseSecurityConstants.COOKIES.HTTP_ONLY_TOKEN);
+
+            if (Objects.nonNull(cookie) && StringUtils.hasText(cookie.getValue())) {
+                return cookie.getValue();
+            }
+
             // Extract from Authorization header
             String authHeader = request.getHeaders().getFirst(BaseSecurityConstants.HEADER.AUTHORIZATION_HEADER);
 
