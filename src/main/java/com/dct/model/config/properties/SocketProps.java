@@ -7,6 +7,7 @@ import com.dct.model.constants.BasePropertiesConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +78,7 @@ public class SocketProps {
     }
 
     public List<Class<?>> getInterceptors() {
-        return interceptors;
+        return Optional.ofNullable(this.interceptors).orElseGet(ArrayList::new);
     }
 
     public void setInterceptors(List<Class<?>> interceptors) {
