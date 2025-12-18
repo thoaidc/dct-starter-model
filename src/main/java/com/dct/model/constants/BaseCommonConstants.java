@@ -93,6 +93,8 @@ public interface BaseCommonConstants {
         String[] DEFAULT_BROKER_PREFIXES = { "/topic" };
         String[] DEFAULT_APPLICATION_PREFIXES = { "/api/ws" };
         String[] DEFAULT_ENDPOINTS = { "/ws" };
+        long DEFAULT_CLIENT_HEARTBEAT_INTERVAL = 10000; // 10s
+        long DEFAULT_SERVER_HEARTBEAT_INTERVAL = 10000; // 10s
     }
 
     Map<String, String> EXTRA_CHAR_MAP = Map.ofEntries(

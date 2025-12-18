@@ -7,6 +7,7 @@ import com.dct.model.constants.BasePropertiesConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -26,9 +27,14 @@ import java.util.Optional;
 @ConfigurationProperties(prefix = BasePropertiesConstants.SOCKET_CONFIG)
 public class SocketProps {
     private ActivateStatus activate = ActivateStatus.DISABLED;
+    private String[] allowedOriginPatterns;
     private String[] brokerPrefixes;
     private String[] applicationPrefixes;
     private String[] endpoints;
+    private List<Class<?>> interceptors;
+    private Class<?> handshakeHandler;
+    private Long serverHeartbeatInterval;
+    private Long clientHeartbeatInterval;
 
     public ActivateStatus getActivate() {
         return activate;
@@ -60,5 +66,47 @@ public class SocketProps {
 
     public void setEndpoints(String[] endpoints) {
         this.endpoints = endpoints;
+    }
+
+    public String[] getAllowedOriginPatterns() {
+        return allowedOriginPatterns;
+    }
+
+    public void setAllowedOriginPatterns(String[] allowedOriginPatterns) {
+        this.allowedOriginPatterns = allowedOriginPatterns;
+    }
+
+    public List<Class<?>> getInterceptors() {
+        return interceptors;
+    }
+
+    public void setInterceptors(List<Class<?>> interceptors) {
+        this.interceptors = interceptors;
+    }
+
+    public Class<?> getHandshakeHandler() {
+        return handshakeHandler;
+    }
+
+    public void setHandshakeHandler(Class<?> handshakeHandler) {
+        this.handshakeHandler = handshakeHandler;
+    }
+
+    public Long getServerHeartbeatInterval() {
+        return Optional.ofNullable(serverHeartbeatInterval)
+                .orElse(BaseCommonConstants.Socket.DEFAULT_SERVER_HEARTBEAT_INTERVAL);
+    }
+
+    public void setServerHeartbeatInterval(Long serverHeartbeatInterval) {
+        this.serverHeartbeatInterval = serverHeartbeatInterval;
+    }
+
+    public Long getClientHeartbeatInterval() {
+        return Optional.ofNullable(clientHeartbeatInterval)
+                .orElse(BaseCommonConstants.Socket.DEFAULT_SERVER_HEARTBEAT_INTERVAL);
+    }
+
+    public void setClientHeartbeatInterval(Long clientHeartbeatInterval) {
+        this.clientHeartbeatInterval = clientHeartbeatInterval;
     }
 }
