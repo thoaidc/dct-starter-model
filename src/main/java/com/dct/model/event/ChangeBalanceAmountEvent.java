@@ -7,6 +7,7 @@ public class ChangeBalanceAmountEvent {
     private String description;
     private Integer type;
     private Integer refId;
+    private Integer senderId;
     private Integer receiverId;
     private BigDecimal amount;
 
@@ -32,6 +33,14 @@ public class ChangeBalanceAmountEvent {
 
     public void setRefId(Integer refId) {
         this.refId = refId;
+    }
+
+    public Integer getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
     }
 
     public Integer getReceiverId() {
