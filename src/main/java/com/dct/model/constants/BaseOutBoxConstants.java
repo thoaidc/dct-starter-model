@@ -15,6 +15,7 @@ public interface BaseOutBoxConstants {
     interface Status {
         String PENDING = "PENDING";
         String COMPLETION = "COMPLETION";
+        String FAILED = "FAILED";
     }
 
     int DELAY_TIME = 5000; // 5 seconds
