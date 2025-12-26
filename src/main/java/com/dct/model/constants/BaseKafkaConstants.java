@@ -9,6 +9,7 @@ public interface BaseKafkaConstants {
         String ORDER_CREATED = "${spring.kafka.topics.order-created}";
         String ORDER_PAYMENT_SUCCESSFUL = "${spring.kafka.topics.order-payment-successful}";
         String ORDER_PAYMENT_FAILURE = "${spring.kafka.topics.order-payment-failure}";
+        String UPDATE_PRODUCT_SALE_QUANTITY = "${spring.kafka.topics.update-product-sale-quantity}";
     }
 
     interface GroupId {
@@ -18,6 +19,7 @@ public interface BaseKafkaConstants {
         String ORDER_CREATED = "${spring.kafka.topics.order-created}";
         String ORDER_PAYMENT_SUCCESSFUL = "${spring.kafka.topics.order-payment-successful}";
         String ORDER_PAYMENT_FAILURE = "${spring.kafka.topics.order-payment-failure}";
+        String UPDATE_PRODUCT_SALE_QUANTITY = "${spring.kafka.topics.update-product-sale-quantity}";
     }
 
     // Number of consumers processing message concurrent
@@ -28,5 +30,6 @@ public interface BaseKafkaConstants {
         String ORDER_CREATED = "1";
         String ORDER_PAYMENT_SUCCESSFUL = "1";
         String ORDER_PAYMENT_FAILURE = "1";
+        String UPDATE_PRODUCT_SALE_QUANTITY = "1";
     }
 }

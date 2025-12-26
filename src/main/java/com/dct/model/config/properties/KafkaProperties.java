@@ -24,6 +24,7 @@ public class KafkaProperties {
         private String orderPaymentSuccessful;
         private String orderPaymentFailure;
         private String changeBalanceAmount;
+        private String updateProductSaleQuantity;
 
         public String getUserCreated() {
             return userCreated;
@@ -79,6 +80,14 @@ public class KafkaProperties {
 
         public void setChangeBalanceAmount(String changeBalanceAmount) {
             this.changeBalanceAmount = changeBalanceAmount;
+        }
+
+        public String getUpdateProductSaleQuantity() {
+            return updateProductSaleQuantity;
+        }
+
+        public void setUpdateProductSaleQuantity(String updateProductSaleQuantity) {
+            this.updateProductSaleQuantity = updateProductSaleQuantity;
         }
     }
 }
